@@ -5,6 +5,7 @@ import DrawerNavigator from "./src/navigations/DrawerNavigator"
 import "./src/utils/gesture-handle/gesture-handle"
 import { StatusBar } from "react-native"
 import useTheme from "./src/hooks/use-theme"
+import { useEffect } from "react"
 
 export type RootStackParamList = {
   Home: undefined

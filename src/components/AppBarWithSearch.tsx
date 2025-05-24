@@ -1,6 +1,6 @@
 import React from "react"
 import { StyleSheet, TextInput, View } from "react-native"
-import { Searchbar, Avatar, IconButton } from "react-native-paper"
+import { Avatar, IconButton } from "react-native-paper"
 import { useNavigation } from "@react-navigation/native"
 import { DrawerActions } from "@react-navigation/native"
 import useTheme from "../hooks/use-theme"

@@ -46,6 +46,9 @@ const MaterialStateIcon =
  */
 export const HomeIcon = MaterialIcon("home")
 
+// Stateful icons
 export const MailStateIcon = MaterialStateIcon("email", "email-outline")
-
 export const VideoStateIcon = MaterialStateIcon("video", "video-outline")
+export const StarStateIcon = MaterialStateIcon("star", "star-outline")
+
+
