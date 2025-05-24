@@ -24,6 +24,7 @@ export interface EmailCardProps {
   isSelected?: boolean
   onSelect: (mail: Mail) => void
   onDeselect: (mail: Mail) => void
+  onPress: (mail: Mail) => void
 }
 
 export default function EmailCard({
@@ -31,6 +32,7 @@ export default function EmailCard({
   isSelected = true,
   onSelect,
   onDeselect,
+  onPress,
 }: EmailCardProps) {
   // To get the component themes
   const theme = useTheme()
@@ -90,7 +92,7 @@ export default function EmailCard({
     <View style={styles.container}>
       <TouchableOpacity
         onLongPress={() => (isSelected ? onDeselect(mail) : onSelect(mail))}
-        onPress={() => console.log("yayy")}
+        onPress={() => onPress(mail)}
         activeOpacity={0.5}
       >
         <Animated.View style={[styles.touchable, { backgroundColor }]}>

@@ -4,8 +4,14 @@ import AppBarWithSearch from "../components/AppBarWithSearch"
 import EmailCard from "../components/EmailCard"
 
 import mailsData, { Mail } from "../data/mails"
+import { StackNavigationProp } from "@react-navigation/stack"
+import { RootStackParamList } from "../navigations/RootNavigator"
 
-export default function InboxScreen({ navigation }: any) {
+interface InboxScreenProps {
+  navigation: StackNavigationProp<RootStackParamList, "Drawer">
+}
+
+export default function InboxScreen({ navigation }: InboxScreenProps) {
   const [searchQuery, setSearchQuery] = useState("")
   // The list of selected mails
   const [selectedMail, setSelectedMail] = useState<string[]>([])
@@ -46,6 +52,7 @@ export default function InboxScreen({ navigation }: any) {
             isSelected={selectedMail.includes(item.id)}
             onSelect={onSelect}
             onDeselect={onDeselect}
+            onPress={() => navigation.push("MailDetail", { mailId: item.id })}
           />
         )}
         contentContainerStyle={{ paddingBottom: 80 }}

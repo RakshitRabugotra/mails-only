@@ -1,11 +1,10 @@
+import useTheme from "./src/hooks/use-theme"
 import { createStackNavigator } from "@react-navigation/stack"
-import DrawerNavigator from "./src/navigations/DrawerNavigator"
 
 // Import gesture handler
 import "./src/utils/gesture-handle/gesture-handle"
 import { StatusBar } from "react-native"
-import useTheme from "./src/hooks/use-theme"
-import { useEffect } from "react"
+import RootNavigator from "./src/navigations/RootNavigator"
 
 export type RootStackParamList = {
   Home: undefined
@@ -24,7 +23,7 @@ const App: React.FC = () => {
   return (
     <>
       <StatusBar backgroundColor={theme.colors.background} />
-      <DrawerNavigator />
+      <RootNavigator />
     </>
     // <RootStack.Navigator initialRouteName="Home">
     //   <RootStack.Screen

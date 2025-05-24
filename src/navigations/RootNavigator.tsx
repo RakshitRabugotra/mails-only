@@ -5,7 +5,7 @@ import MailDetailScreen from '../screens/MailDetailScreen';
 
 export type RootStackParamList = {
   Drawer: undefined
-  MailDetail: { mail: any }
+  MailDetail: { mailId: string }
 }
 
 const Stack = createStackNavigator<RootStackParamList>();
