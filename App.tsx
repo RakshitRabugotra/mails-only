@@ -1,10 +1,10 @@
-import Home from "./src/components/pages/home" // Tabs
+import { createStackNavigator } from "@react-navigation/stack"
+import DrawerNavigator from "./src/navigations/DrawerNavigator"
 
-// Importing the empty screens for Community and Chat
 // Import gesture handler
 import "./src/utils/gesture-handle/gesture-handle"
-import { createStackNavigator } from "@react-navigation/stack"
-import OnboardingScreen from "./src/components/pages/onboarding-screen"
+import { StatusBar } from "react-native"
+import useTheme from "./src/hooks/use-theme"
 
 export type RootStackParamList = {
   Home: undefined
@@ -18,19 +18,25 @@ export type RootStackParamList = {
 export const RootStack = createStackNavigator<RootStackParamList>()
 
 const App: React.FC = () => {
+  const theme = useTheme()
+
   return (
-    <RootStack.Navigator initialRouteName="Home">
-      <RootStack.Screen
-        name="Home"
-        component={Home}
-        options={{ title: "Home", headerShown: false }}
-      />
-      <RootStack.Screen
-        name="Onboarding"
-        component={OnboardingScreen}
-        options={{ title: "Onboarding", headerShown: false }}
-      />
-    </RootStack.Navigator>
+    <>
+      <StatusBar backgroundColor={theme.colors.background} />
+      <DrawerNavigator />
+    </>
+    // <RootStack.Navigator initialRouteName="Home">
+    //   <RootStack.Screen
+    //     name="Home"
+    //     component={Home}
+    //     options={{ title: "Home", headerShown: false }}
+    //   />
+    //   <RootStack.Screen
+    //     name="Onboarding"
+    //     component={OnboardingScreen}
+    //     options={{ title: "Onboarding", headerShown: false }}
+    //   />
+    // </RootStack.Navigator>
   )
 }
 

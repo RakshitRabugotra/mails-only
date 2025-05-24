@@ -1,33 +1,27 @@
+import { StyleSheet, View } from "react-native"
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import { CommonActions } from "@react-navigation/native"
 import { BottomNavigation, Text } from "react-native-paper"
 
-import { CommonActions } from "@react-navigation/native"
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-
-// Importing the screens for the stack
-import MeetScreen from "../meet-screen"
-import HomeScreen from "./home-screen"
+// Importing the screens for the tabs
+import InboxScreen from "../screens/InboxScreen"
+import MeetScreen from "../screens/MeetScreen"
 
 // Type definitions
-import { StackNavigationProp } from "@react-navigation/stack"
-import { RootStackParamList } from "../../../../App"
-import { MailStateIcon, VideoStateIcon } from "../../icons"
-import { StyleSheet, View } from "react-native"
+import { PropsWithChildren } from "react"
+
+// Icons
+import { MailStateIcon, VideoStateIcon } from "../components/icons"
 
 // Define types for the tab navigator and home stack
 export type HomeTabParamList = {
-  HomeTab: undefined
+  Inbox: undefined
   Meet: undefined
 }
 
 export const HomeTab = createBottomTabNavigator<HomeTabParamList>()
 
-type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">
-
-interface Props {
-  navigation: HomeScreenNavigationProp
-}
-
-export default function Home({ navigation }: Props) {
+export default function TabNavigator() {
   const unseenMailCount = 5
 
   return (
@@ -79,23 +73,16 @@ export default function Home({ navigation }: Props) {
       )}
     >
       <HomeTab.Screen
-        name="HomeTab"
-        component={HomeScreen}
+        name="Inbox"
+        component={InboxScreen}
         options={{
           tabBarIcon: ({ color, focused }) => (
-            <View style={styles.iconWrapper}>
+            <IconWithBadge count={unseenMailCount}>
               <MailStateIcon
                 isActive={focused}
                 iconProps={{ color, size: 26 }}
               />
-              {unseenMailCount > 0 && (
-                <View style={styles.badge}>
-                  <Text style={styles.badgeText}>
-                    {unseenMailCount > 99 ? "99+" : unseenMailCount}
-                  </Text>
-                </View>
-              )}
-            </View>
+            </IconWithBadge>
           ),
         }}
       />
@@ -114,6 +101,20 @@ export default function Home({ navigation }: Props) {
     </HomeTab.Navigator>
   )
 }
+
+const IconWithBadge = ({
+  count,
+  children,
+}: PropsWithChildren<{ count: number }>) => (
+  <View style={styles.iconWrapper}>
+    {children}
+    {count > 0 && (
+      <View style={styles.badge}>
+        <Text style={styles.badgeText}>{count > 99 ? "99+" : count}</Text>
+      </View>
+    )}
+  </View>
+)
 
 const styles = StyleSheet.create({
   iconWrapper: {
