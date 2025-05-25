@@ -33,14 +33,6 @@ jobs:
       - name: Set Gradle heap size
         run: echo "org.gradle.jvmargs=-Xmx4g" >> ./android/gradle.properties
 
-      - name: Create local .env file
-        run: |
-          cat <<EOF > .env
-          GOOGLE_PLACES_API_KEY=${{ secrets.GOOGLE_PLACES_API_KEY }}
-          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
-          BACKEND_URI=${{ secrets.BACKEND_URI }}
-          EOF
-
       - name: Build preview (Android)
         run: |
           cd android
@@ -80,14 +72,6 @@ jobs:
       - name: Set Gradle heap size
         run: echo "org.gradle.jvmargs=-Xmx4g" >> ./android/gradle.properties
 
-      - name: Create local .env file
-        run: |
-          cat <<EOF > .env
-          GOOGLE_PLACES_API_KEY=${{ secrets.GOOGLE_PLACES_API_KEY }}
-          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
-          BACKEND_URI=${{ secrets.BACKEND_URI }}
-          EOF
-
       - name: Build production (Android)
         run: |
           cd android
@@ -126,14 +110,6 @@ jobs:
 
       - name: Set Gradle heap size
         run: echo "org.gradle.jvmargs=-Xmx4g" >> ./android/gradle.properties
-
-      - name: Create local .env file
-        run: |
-          cat <<EOF > .env
-          GOOGLE_PLACES_API_KEY=${{ secrets.GOOGLE_PLACES_API_KEY }}
-          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
-          BACKEND_URI=${{ secrets.BACKEND_URI }}
-          EOF
 
       - name: Build dev (Android)
         run: |
