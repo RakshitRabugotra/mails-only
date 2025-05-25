@@ -39,11 +39,26 @@ export default function InboxScreen({ navigation }: InboxScreenProps) {
     // Check if it already exists
     if (mail?.selected) return
     // Else, mark it selected
-    // setSelectedMail(prev => [...prev, mail.id])
+    setMails(prev =>
+      prev
+        ? prev.map(value =>
+            value.id === mail.id ? { ...value, selected: true } : value
+          )
+        : null
+    )
   }, [])
 
   const onDeselect = useCallback((mail: ExtendedMail) => {
-    // setSelectedMail(prev => prev.filter(item => item !== mail.id))
+    // Check if it deselected, then return
+    if (!mail?.selected) return
+    // Else, mark it deselected
+    setMails(prev =>
+      prev
+        ? prev.map(value =>
+            value.id === mail.id ? { ...value, selected: false } : value
+          )
+        : null
+    )
   }, [])
 
   // Utility to fetch mails on the go
