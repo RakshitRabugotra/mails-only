@@ -11,13 +11,12 @@ import {
   StyleSheet,
   TextStyle,
   TouchableOpacity,
+  useColorScheme,
   View,
 } from "react-native"
 import useTheme from "../hooks/use-theme"
 import { StarStateIcon } from "./icons"
 import { ExtendedMail } from "../types"
-
-type StackNavigation = StackNavigationProp<RootStackParamList, "MailDetail">
 
 export interface EmailCardProps {
   mail: ExtendedMail
@@ -30,8 +29,8 @@ const EmailCard = React.memo(
   ({ mail, onSelect, onDeselect, onPress }: EmailCardProps) => {
     // To get the component themes
     const theme = useTheme()
-    // To navigate to the mail detail page
-    const navigation = useNavigation<StackNavigation>()
+    const colorScheme = useColorScheme()
+
     // The State variables
     const [isImportant, setImportant] = useState(Math.random() >= 0.5)
 
@@ -39,8 +38,12 @@ const EmailCard = React.memo(
     const textStyles = useMemo(
       () =>
         (mail.unread
-          ? { fontFamily: "Inter", color: "black", fontWeight: "bold" }
-          : { fontFamily: "Inter", color: theme.colors.text }) as TextStyle,
+          ? {
+              fontFamily: "Inter",
+              fontWeight: "bold",
+              color: colorScheme === "dark" ? theme.colors.text : "#000",
+            }
+          : { fontFamily: "Inter", color: theme.colors.outline }) as TextStyle,
       [mail]
     )
 
@@ -124,7 +127,18 @@ const EmailCard = React.memo(
 
               {/* The preview for the mail */}
               <View style={styles.rowContainer}>
-                <Text style={styles.previewText}>{mail.preview}</Text>
+                <Text
+                  style={[
+                    styles.previewText,
+                    {
+                      color: mail.unread
+                        ? theme.colors.text
+                        : theme.colors.outline,
+                    },
+                  ]}
+                >
+                  {mail.preview}
+                </Text>
                 <TouchableOpacity
                   hitSlop={5}
                   onPress={() => setImportant(prev => !prev)}
@@ -133,6 +147,7 @@ const EmailCard = React.memo(
                     isActive={isImportant}
                     iconProps={{ size: 20 }}
                     activeProps={{ color: "#FBBC05" }}
+                    inactiveProps={{ color: theme.colors.outline }}
                   />
                 </TouchableOpacity>
               </View>

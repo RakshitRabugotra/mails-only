@@ -62,7 +62,7 @@ export default function SearchScreen() {
         <View
           style={[
             styles.searchBarContainer,
-            { backgroundColor: theme.colors.primaryContainer },
+            { backgroundColor: theme.colors.card },
           ]}
         >
           <IconButton icon="arrow-left" onPress={() => navigation.goBack()} />

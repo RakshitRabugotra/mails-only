@@ -1,5 +1,5 @@
 import React from "react"
-import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native"
+import { StyleSheet, TouchableOpacity, View } from "react-native"
 import { Avatar, IconButton, Text } from "react-native-paper"
 import { useNavigation } from "@react-navigation/native"
 import { DrawerActions } from "@react-navigation/native"
@@ -9,12 +9,7 @@ import { RootStackParamList } from "../navigations/RootNavigator"
 import { SharedElement } from "react-navigation-shared-element"
 import Images from "../constants/Images"
 
-interface AppBarWithSearchProps {
-  // searchQuery: string
-  // setSearchQuery: (query: string) => void
-}
-
-export default function AppBarWithSearch({}: AppBarWithSearchProps) {
+export default function AppBarWithSearch() {
   const navigation =
     useNavigation<StackNavigationProp<RootStackParamList, "SearchMail">>()
   const theme = useTheme()
@@ -24,26 +19,11 @@ export default function AppBarWithSearch({}: AppBarWithSearchProps) {
   }
 
   return (
-    <View
-      style={[
-        styles.header,
-        { backgroundColor: theme.colors.primaryContainer },
-      ]}
-    >
+    <View style={[styles.header, { backgroundColor: theme.colors.card }]}>
       <IconButton
         icon="menu"
         onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
       />
-      {/* <View style={styles.searchContainer}>
-        <TextInput
-          placeholder="Search in emails"
-          value={searchQuery}
-          onChangeText={setSearchQuery}
-          style={styles.searchbar}
-          placeholderTextColor={'#000'}
-          // inputStyle={{ fontSize: 14, minHeight: 0 }}
-        />
-      </View> */}
       <SharedElement id="searchBar" style={styles.searchContainer}>
         <TouchableOpacity style={styles.searchContainer} onPress={goToSearch}>
           <Text style={styles.searchPlaceholder}>Search in emails</Text>

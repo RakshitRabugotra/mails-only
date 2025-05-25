@@ -37,6 +37,7 @@ export default function OnboardingScreen({
         onPress={handleContinue}
         style={styles.button}
         contentStyle={{ paddingVertical: 6 }}
+        textColor="#fff"
         buttonColor={theme.colors.primary}
       >
         Continue
