@@ -80,3 +80,30 @@ export const updateMailFromID = async (
   }
   return result
 }
+
+
+/**
+ * Delete the mail
+ */
+export const deleteMailFromID = async (
+  mailId: string
+): Promise<APIResponse<ExtendedMail>> => {
+  const result: APIResponse<ExtendedMail> = { data: null, error: null }
+
+  try {
+    // First get the mail we're trying to delete
+    const { data: mail, error } = await getMailFromID(mailId)
+    // Throw the error if so
+    if(error) throw error;
+    // Set the data
+    result.data = mail;
+    // Send the signal to delete the mail
+    const resp = await mailFetch(`/${mailId}`, {
+      method: "DELETE"
+    })
+    if (!resp.ok) throw new Error("Error updating the mail-id: " + mailId)
+  } catch (error) {
+    result.error = error as Error
+  }
+  return result
+}

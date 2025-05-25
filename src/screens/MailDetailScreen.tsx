@@ -13,7 +13,13 @@ import {
 } from "react-native-paper"
 import { RootStackParamList } from "../navigations/RootNavigator"
 import { ExtendedMail } from "../types"
-import { getMailFromID, updateMailFromID } from "../services"
+import { deleteMailFromID, getMailFromID, updateMailFromID } from "../services"
+import {
+  ChevronDownIcon,
+  PaperclipIcon,
+  ReplyIcon,
+  StarStateIcon,
+} from "../components/icons"
 
 type Props = StackScreenProps<RootStackParamList, "MailDetail">
 
@@ -29,7 +35,7 @@ const MailDetailScreen: React.FC<Props> = ({ route, navigation }) => {
 
   // The formatted time from the mail
   const formattedTime = useMemo(
-    () => (mail ? moment(mail.timestamp).format("LTS") : ""),
+    () => (mail ? moment(mail.timestamp).format("LT") : ""),
     [mail]
   )
 
@@ -65,8 +71,11 @@ const MailDetailScreen: React.FC<Props> = ({ route, navigation }) => {
   // mark the email as unread
   const handleMarkUnread = useCallback(() => {
     if (!mail || isLoading) return
+    // If already unread, skip to navigation
+    if (mail.unread) return navigation.push("Drawer")
+    // Close the menu first
+    closeMenu()
 
-    closeMenu
     updateMailFromID(mail.id, { ...mail, unread: true })
       .then(({ error }) => {
         if (error) throw error
@@ -80,7 +89,27 @@ const MailDetailScreen: React.FC<Props> = ({ route, navigation }) => {
       .finally(() => {
         navigation.push("Drawer")
       })
-  }, [mail, isLoading])
+  }, [mail, isLoading, closeMenu])
+
+  const handleDeleteMail = useCallback(() => {
+    if (!mail || isLoading) return
+    // Close the menu first
+    closeMenu()
+
+    deleteMailFromID(mail.id)
+      .then(({ data, error }) => {
+        if (error) throw error
+      })
+      .catch(err =>
+        console.error(
+          "error while marking mail as read: " + (err as Error).message
+        )
+      )
+      // Re-route to the home screen
+      .finally(() => {
+        navigation.push("Drawer")
+      })
+  }, [mail, isLoading, closeMenu])
 
   if (isLoading || mail === null) {
     return (
@@ -111,17 +140,25 @@ const MailDetailScreen: React.FC<Props> = ({ route, navigation }) => {
             <Menu.Item onPress={() => {}} title="Report spam" />
           </Menu>
           <Appbar.Action icon="email-outline" onPress={() => {}} />
-          <Appbar.Action icon="delete" onPress={() => {}} />
-          <Appbar.Action icon="archive" onPress={() => {}} />
+          <Appbar.Action icon="trash-can-outline" onPress={handleDeleteMail} />
+          <Appbar.Action icon="archive-arrow-down-outline" onPress={() => {}} />
         </View>
       </Appbar.Header>
 
       <ScrollView contentContainerStyle={styles.container}>
-        <Text variant="titleLarge" style={styles.subject}>
-          {mail.subject}
-        </Text>
-        <View style={styles.labelContainer}>
-          <Text style={styles.label}>Inbox</Text>
+        <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
+          <View style={{ flex: 1 }}>
+            <Text variant="titleLarge" style={styles.subject}>
+              {mail.subject}
+            </Text>
+            <View style={styles.labelContainer}>
+              <Text style={styles.label}>Inbox</Text>
+            </View>
+          </View>
+          <StarStateIcon
+            isActive={mail.important ?? false}
+            iconProps={{ size: 26 }}
+          />
         </View>
 
         <View style={styles.senderRow}>
@@ -131,7 +168,13 @@ const MailDetailScreen: React.FC<Props> = ({ route, navigation }) => {
             style={{ backgroundColor: theme.colors.tertiary }}
           />
           <View style={styles.senderInfo}>
-            <Text variant="bodyLarge">{mail.sender}</Text>
+            <View>
+              <Text variant="bodyLarge">{mail.sender}</Text>
+              <View style={{ flexDirection: "row", gap: 2 }}>
+                <Text variant="bodySmall">{"to me"}</Text>
+                <ChevronDownIcon size={12} color={"#000"} />
+              </View>
+            </View>
             <Text variant="labelMedium" style={{ color: "gray" }}>
               {formattedTime}
             </Text>
@@ -147,11 +190,24 @@ const MailDetailScreen: React.FC<Props> = ({ route, navigation }) => {
 
       {/* Bottom input area mock (non-functional) */}
       <View style={styles.replyBar}>
-        <TextInput
-          style={styles.replyInput}
-          placeholder="Reply"
-          placeholderTextColor={"#aaa"}
-        />
+        <PaperclipIcon />
+        <View style={styles.inputContainer}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginRight: 4,
+            }}
+          >
+            <ReplyIcon />
+            <ChevronDownIcon size={12} />
+          </View>
+          <TextInput
+            style={styles.replyInput}
+            placeholder="Reply"
+            placeholderTextColor={"#aaa"}
+          />
+        </View>
         <IconButton icon="emoticon-outline" size={24} onPress={() => {}} />
       </View>
     </>
@@ -167,6 +223,7 @@ const styles = StyleSheet.create({
   },
   subject: {
     fontWeight: "700",
+    fontSize: 26,
     marginBottom: 8,
   },
   labelContainer: {
@@ -187,6 +244,8 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   senderInfo: {
+    flexDirection: "row",
+    gap: 16,
     marginLeft: 12,
     flex: 1,
   },
@@ -197,7 +256,6 @@ const styles = StyleSheet.create({
   bodyText: {
     fontSize: 15,
     lineHeight: 22,
-    color: "#333",
   },
   replyBar: {
     flexDirection: "row",
@@ -208,12 +266,15 @@ const styles = StyleSheet.create({
     borderColor: "#e0e0e0",
     backgroundColor: "#fafafa",
   },
-  replyInput: {
+  inputContainer: {
     flex: 1,
+    flexDirection: "row",
     backgroundColor: "#f2f2f2",
     borderRadius: 20,
-    paddingVertical: 8,
     paddingHorizontal: 16,
     marginRight: 8,
+  },
+  replyInput: {
+    paddingVertical: 8,
   },
 })

@@ -1,24 +1,6 @@
 {
   "mails": [
     {
-      "id": "1",
-      "sender": "Alice Johnson",
-      "subject": "Welcome to our service!",
-      "preview": "Hi there, thanks for signing up...",
-      "timestamp": "2025-05-20T10:00:00Z",
-      "body": "Hi there,\n\nThanks for signing up for our email service. We hope you enjoy the experience.\n\nBest,\nTeam",
-      "unread": true
-    },
-    {
-      "id": "2",
-      "sender": "Bob Smith",
-      "subject": "Your invoice is ready",
-      "preview": "Please find attached the invoice for...",
-      "timestamp": "2025-05-21T12:00:00Z",
-      "body": "Dear customer,\n\nAttached is your invoice for May 2025.\n\nThanks,\nAccounts",
-      "unread": false
-    },
-    {
       "id": "3",
       "sender": "Charlie Daniels",
       "subject": "Meeting Reminder",

@@ -7,6 +7,7 @@ import useTheme from "../hooks/use-theme"
 import { StackNavigationProp } from "@react-navigation/stack"
 import { RootStackParamList } from "../navigations/RootNavigator"
 import { SharedElement } from "react-navigation-shared-element"
+import Images from "../constants/Images"
 
 interface AppBarWithSearchProps {
   // searchQuery: string
@@ -52,7 +53,7 @@ export default function AppBarWithSearch({}: AppBarWithSearchProps) {
       <Avatar.Image
         size={32}
         source={{
-          uri: "https://www.gravatar.com/avatar/00000000000000000000000000000000",
+          uri: Images.placeholderAvatar,
         }}
         style={{ marginHorizontal: 10 }}
       />
