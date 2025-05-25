@@ -1,0 +1,152 @@
+name: CI/CD Pipeline
+
+on:
+  pull_request:
+    branches:
+      - main
+      - dev
+  push:
+    branches:
+      - main
+      - dev
+
+jobs:
+  preview-build:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Grant execute permissions to gradlew
+        run: chmod +x ./android/gradlew
+
+      - name: Set Gradle heap size
+        run: echo "org.gradle.jvmargs=-Xmx4g" >> ./android/gradle.properties
+
+      - name: Create local .env file
+        run: |
+          cat <<EOF > .env
+          GOOGLE_PLACES_API_KEY=${{ secrets.GOOGLE_PLACES_API_KEY }}
+          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+          BACKEND_URI=${{ secrets.BACKEND_URI }}
+          EOF
+
+      - name: Build preview (Android)
+        run: |
+          cd android
+          ./gradlew assembleDebug --no-daemon
+
+      - name: Upload APK (Preview)
+        uses: actions/upload-artifact@v4
+        with:
+          name: preview-app.apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+
+      # ✅ Add artifact info to the summary
+      - name: Add download info to summary
+        run: |
+          echo "### ✅ Preview Build Completed Successfully!" >> $GITHUB_STEP_SUMMARY
+          echo "➡️ Download the APK from the 'Artifacts' section below 👇" >> $GITHUB_STEP_SUMMARY
+
+  production-build:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Grant execute permissions to gradlew
+        run: chmod +x ./android/gradlew
+
+      - name: Set Gradle heap size
+        run: echo "org.gradle.jvmargs=-Xmx4g" >> ./android/gradle.properties
+
+      - name: Create local .env file
+        run: |
+          cat <<EOF > .env
+          GOOGLE_PLACES_API_KEY=${{ secrets.GOOGLE_PLACES_API_KEY }}
+          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+          BACKEND_URI=${{ secrets.BACKEND_URI }}
+          EOF
+
+      - name: Build production (Android)
+        run: |
+          cd android
+          ./gradlew assembleRelease --no-daemon
+
+      - name: Upload APK (Production)
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-app.apk
+          path: android/app/build/outputs/apk/release/app-release.apk
+
+      # ✅ Add artifact info to the summary
+      - name: Add download info to summary
+        run: |
+          echo "### ✅ Production Build Ready! 🚀" >> $GITHUB_STEP_SUMMARY
+          echo "➡️ Download the APK from the 'Artifacts' section below 👇" >> $GITHUB_STEP_SUMMARY
+
+  dev-build:
+    if: github.ref == 'refs/heads/dev'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Grant execute permissions to gradlew
+        run: chmod +x ./android/gradlew
+
+      - name: Set Gradle heap size
+        run: echo "org.gradle.jvmargs=-Xmx4g" >> ./android/gradle.properties
+
+      - name: Create local .env file
+        run: |
+          cat <<EOF > .env
+          GOOGLE_PLACES_API_KEY=${{ secrets.GOOGLE_PLACES_API_KEY }}
+          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+          BACKEND_URI=${{ secrets.BACKEND_URI }}
+          EOF
+
+      - name: Build dev (Android)
+        run: |
+          cd android
+          ./gradlew assembleDebug --no-daemon
+
+      - name: Upload APK (Dev)
+        uses: actions/upload-artifact@v4
+        with:
+          name: dev-app.apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Add download info to summary
+        run: |
+          echo "### ✅ Dev Build Ready! 🚀" >> $GITHUB_STEP_SUMMARY
+          echo "➡️ Download the APK from the 'Artifacts' section below 👇" >> $GITHUB_STEP_SUMMARY
