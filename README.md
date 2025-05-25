@@ -1,97 +1,94 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 📬 React Native Gmail Clone
 
-# Getting Started
+This is a React Native project that replicates the Gmail inbox interface. The app connects to a mock backend powered by `json-server` and uses `ngrok` to expose local APIs to the frontend.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## 🚀 Getting Started
 
-## Step 1: Start Metro
+Follow the steps below to set up and run the project on your local machine.
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+### 1. Clone the Repository
 
-To start the Metro dev server, run the following command from the root of your React Native project:
-
-```sh
-# Using npm
-npm start
-
-# OR using Yarn
-yarn start
+```bash
+git clone <your-repo-url>
 ```
 
-## Step 2: Build and run your app
+### 2. Navigate to the Project Directory
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
+```bash
+cd <your-repo-name>
+```
+### 3. Run the App on Android
+```bash
 npm run android
-
-# OR using Yarn
-yarn android
 ```
 
-### iOS
+Make sure you have an Android emulator running or a physical device connected.
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+## 🖥️ Starting the Mock Backend
+### 4. Install json-server
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
+Install it globally (recommended) or as a dev dependency:
+```bash
+npm install -g json-server
+```
+***OR***
+```bash
+npm install -D json-server
 ```
 
-Then, and every time you update your native dependencies, run:
+### 5. Start the json-server
 
-```sh
-bundle exec pod install
+```bash
+npx json-server db.json
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+This will start the server at http://localhost:3000.
 
-```sh
-# Using npm
-npm run ios
+## 🌐 Expose the Backend Using Ngrok
+### 6. Register and Install ngrok
 
-# OR using Yarn
-yarn ios
+Follow the ngrok official documentation to:
+- Sign up for an account
+- Install the CLI
+- Authenticate your ngrok installation
+
+### 7. Expose Your Local Backend
+
+```bash
+ngrok http http://localhost:3000
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+Ngrok will generate a public URL (e.g., https://abcd1234.ngrok.io).
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+## 🔧 Update the Frontend to Use the Public Backend URL
 
-## Step 3: Modify your app
+In the file src/services/mail.ts, update the BACKEND_URI:
 
-Now that you have successfully run the app, let's make changes!
+```ts
+// Before:
+const BACKEND_URI = "https://localhost:3000/mails";
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+// After:
+const BACKEND_URI = "<your-ngrok-public-url>/mails";
+```
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+Replace `<your-ngrok-public-url>` with the actual URL provided by ngrok (e.g., `https://abcd1234.ngrok.io`).
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+## ✅ You're All Set!
 
-## Congratulations! :tada:
+You can now use the app and interact with the mock backend over the internet via the public URL provided by ngrok.
 
-You've successfully run and modified your React Native App. :partying_face:
+## 📂 Project Structure
 
-### Now what?
+```
+├── db.json                # Mock database for json-server
+├── src/
+│   ├── services/
+│   │   └── mail.ts        # API config with backend URI
+│   └── ...                # Other app files
+├── App.tsx
+└── ...
+```
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## 📄 License
+This project is for educational and personal use only.
