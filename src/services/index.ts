@@ -36,3 +36,24 @@ export const getPaginatedMails = async (
     return result
   }
 }
+
+export const getMailFromID = async (
+  mailId: string
+): Promise<APIResponse<ExtendedMail>> => {
+  const result = { data: null, error: null } as APIResponse<ExtendedMail>
+
+  // Try to fetch the email
+  try {
+    const resp = await mailFetch(`/${mailId}`)
+    console.log(resp.url)
+    if (resp.ok) {
+      result.data = await resp.json()
+      return result
+    }
+    // Else, throw the error and return no data
+    throw new Error("Error while fetching the data: " + resp.statusText)
+  } catch (error) {
+    result.error = error as Error
+    return result
+  }
+} 
