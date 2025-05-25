@@ -6,7 +6,7 @@ import EmailCard from "../components/EmailCard"
 import { StackNavigationProp } from "@react-navigation/stack"
 import { RootStackParamList } from "../navigations/RootNavigator"
 import { ExtendedMail } from "../types"
-import { getPaginatedMails } from "../services"
+import { getPaginatedMails, updateMailFromID } from "../services"
 import { ActivityIndicator, Button, Text } from "react-native-paper"
 
 interface InboxScreenProps {
@@ -100,6 +100,34 @@ export default function InboxScreen({ navigation }: InboxScreenProps) {
     fetchMail(page)
   }, [])
 
+  // When pressed, mark the email as read, and reroute to the detail screen
+  const handleEmailPress = useCallback(
+    (mail: ExtendedMail) => {
+      if (!mail) return
+      // Start marking as read
+      updateMailFromID(mail.id, { ...mail, unread: false })
+        .then(({ error }) => {
+          if (error) throw error
+          // Update the local instance
+          setMails(prev =>
+            prev
+              ? prev.map(value =>
+                  value.id === mail.id ? { ...value, unread: false } : value
+                )
+              : null
+          )
+        })
+        .catch(err =>
+          console.error(
+            "error while marking mail as read: " + (err as Error).message
+          )
+        )
+        // Re-route to the detail screen
+        .finally(() => navigation.push("MailDetail", { mailId: mail.id }))
+    },
+    [setMails]
+  )
+
   // Fetch all the mails, in paginated way
   useEffect(() => {
     fetchMail(page)
@@ -137,7 +165,7 @@ export default function InboxScreen({ navigation }: InboxScreenProps) {
               mail={item}
               onSelect={onSelect}
               onDeselect={onDeselect}
-              onPress={() => navigation.push("MailDetail", { mailId: item.id })}
+              onPress={handleEmailPress}
             />
           )}
           contentContainerStyle={{ paddingBottom: 200 }}

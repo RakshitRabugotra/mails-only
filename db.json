@@ -25,25 +25,25 @@
       "preview": "Just a reminder that we have a meeting...",
       "timestamp": "2025-05-22T09:30:00Z",
       "body": "Hi team,\n\nJust a reminder that we have a meeting scheduled tomorrow at 10 AM.\n\nCheers,\nCharlie",
-      "unread": true
+      "unread": false
     },
     {
       "id": "4",
       "sender": "Dana Lee",
       "subject": "Weekly Newsletter",
-      "preview": "Here\u2019s your roundup of the week...",
+      "preview": "Here’s your roundup of the week...",
       "timestamp": "2025-05-23T15:45:00Z",
-      "body": "Hello subscriber,\n\nHere\u2019s your roundup of the week\u2019s top stories and insights.\n\nWarm regards,\nNewsletter Team",
-      "unread": false
+      "body": "Hello subscriber,\n\nHere’s your roundup of the week’s top stories and insights.\n\nWarm regards,\nNewsletter Team",
+      "unread": true
     },
     {
       "id": "5",
       "sender": "Evan Stone",
       "subject": "Event Invitation",
-      "preview": "You\u2019re invited to our annual...",
+      "preview": "You’re invited to our annual...",
       "timestamp": "2025-05-24T08:00:00Z",
-      "body": "Hello,\n\nYou\u2019re invited to our annual appreciation gala this Friday evening. RSVP by Thursday.\n\nRegards,\nEvents Team",
-      "unread": true
+      "body": "Hello,\n\nYou’re invited to our annual appreciation gala this Friday evening. RSVP by Thursday.\n\nRegards,\nEvents Team",
+      "unread": false
     },
     {
       "id": "6",
@@ -58,9 +58,9 @@
       "id": "7",
       "sender": "George Brown",
       "subject": "Product Update",
-      "preview": "We\u2019ve made some exciting changes...",
+      "preview": "We’ve made some exciting changes...",
       "timestamp": "2025-05-24T11:22:00Z",
-      "body": "Hi there,\n\nWe\u2019ve made some exciting updates to our product. Check out what\u2019s new in the latest release!\n\nCheers,\nThe Product Team",
+      "body": "Hi there,\n\nWe’ve made some exciting updates to our product. Check out what’s new in the latest release!\n\nCheers,\nThe Product Team",
       "unread": true
     },
     {
@@ -76,9 +76,9 @@
       "id": "9",
       "sender": "Ian Black",
       "subject": "Feedback Request",
-      "preview": "We\u2019d love to hear your thoughts...",
+      "preview": "We’d love to hear your thoughts...",
       "timestamp": "2025-05-22T14:00:00Z",
-      "body": "Hi,\n\nWe\u2019d love to hear your thoughts on your recent experience. Please take a minute to complete our survey.\n\nBest,\nCustomer Service",
+      "body": "Hi,\n\nWe’d love to hear your thoughts on your recent experience. Please take a minute to complete our survey.\n\nBest,\nCustomer Service",
       "unread": true
     },
     {
@@ -96,7 +96,7 @@
       "subject": "Here's what you missed",
       "preview": "We wanted to say thanks...",
       "timestamp": "2025-05-24T13:50:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": false
     },
     {
@@ -105,8 +105,8 @@
       "subject": "Here's what you missed",
       "preview": "Please confirm your details...",
       "timestamp": "2025-05-24T14:00:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
-      "unread": false
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "unread": true
     },
     {
       "id": "13",
@@ -123,7 +123,7 @@
       "subject": "Action required",
       "preview": "We wanted to say thanks...",
       "timestamp": "2025-05-24T14:20:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": false
     },
     {
@@ -132,7 +132,7 @@
       "subject": "Survey request",
       "preview": "Please confirm your details...",
       "timestamp": "2025-05-24T14:30:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": false
     },
     {
@@ -150,7 +150,7 @@
       "subject": "You're invited",
       "preview": "Catch up on the latest updates...",
       "timestamp": "2025-05-24T14:50:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": true
     },
     {
@@ -159,7 +159,7 @@
       "subject": "Survey request",
       "preview": "We wanted to say thanks...",
       "timestamp": "2025-05-24T15:00:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": false
     },
     {
@@ -168,7 +168,7 @@
       "subject": "Action required",
       "preview": "Join us for an exclusive event...",
       "timestamp": "2025-05-24T15:10:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": false
     },
     {
@@ -177,7 +177,7 @@
       "subject": "Check this out",
       "preview": "We wanted to say thanks...",
       "timestamp": "2025-05-24T15:20:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": true
     },
     {
@@ -195,7 +195,7 @@
       "subject": "Don't miss out!",
       "preview": "Read about the newest changes...",
       "timestamp": "2025-05-24T15:40:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": false
     },
     {
@@ -204,7 +204,7 @@
       "subject": "Important info",
       "preview": "Help us improve with your feedback...",
       "timestamp": "2025-05-24T15:50:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": true
     },
     {
@@ -213,7 +213,7 @@
       "subject": "Latest news",
       "preview": "Your account has been updated...",
       "timestamp": "2025-05-24T16:00:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": true
     },
     {
@@ -222,7 +222,7 @@
       "subject": "Don't miss out!",
       "preview": "Please confirm your details...",
       "timestamp": "2025-05-24T16:10:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": true
     },
     {
@@ -231,7 +231,7 @@
       "subject": "Latest news",
       "preview": "Help us improve with your feedback...",
       "timestamp": "2025-05-24T16:20:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": true
     },
     {
@@ -247,9 +247,9 @@
       "id": "28",
       "sender": "Ava Johnson",
       "subject": "Don't miss out!",
-      "preview": "You\u2019re eligible for a new offer...",
+      "preview": "You’re eligible for a new offer...",
       "timestamp": "2025-05-24T16:40:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": false
     },
     {
@@ -265,9 +265,9 @@
       "id": "30",
       "sender": "Elijah Jones",
       "subject": "Latest news",
-      "preview": "You\u2019re eligible for a new offer...",
+      "preview": "You’re eligible for a new offer...",
       "timestamp": "2025-05-24T17:00:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": false
     },
     {
@@ -276,7 +276,7 @@
       "subject": "Here's what you missed",
       "preview": "Help us improve with your feedback...",
       "timestamp": "2025-05-24T17:10:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": false
     },
     {
@@ -285,7 +285,7 @@
       "subject": "Important info",
       "preview": "Join us for an exclusive event...",
       "timestamp": "2025-05-24T17:20:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": false
     },
     {
@@ -294,7 +294,7 @@
       "subject": "Thank you!",
       "preview": "Please confirm your details...",
       "timestamp": "2025-05-24T17:30:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": false
     },
     {
@@ -312,7 +312,7 @@
       "subject": "Latest news",
       "preview": "Read about the newest changes...",
       "timestamp": "2025-05-24T17:50:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": false
     },
     {
@@ -321,7 +321,7 @@
       "subject": "Thank you!",
       "preview": "Your account has been updated...",
       "timestamp": "2025-05-24T18:00:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": true
     },
     {
@@ -339,7 +339,7 @@
       "subject": "Check this out",
       "preview": "Your account has been updated...",
       "timestamp": "2025-05-24T18:20:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": false
     },
     {
@@ -366,7 +366,7 @@
       "subject": "Check this out",
       "preview": "We wanted to say thanks...",
       "timestamp": "2025-05-24T18:50:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": false
     },
     {
@@ -382,9 +382,9 @@
       "id": "43",
       "sender": "Olivia Johnson",
       "subject": "Action required",
-      "preview": "You\u2019re eligible for a new offer...",
+      "preview": "You’re eligible for a new offer...",
       "timestamp": "2025-05-24T19:10:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": true
     },
     {
@@ -427,9 +427,9 @@
       "id": "48",
       "sender": "Emma Williams",
       "subject": "You're invited",
-      "preview": "You\u2019re eligible for a new offer...",
+      "preview": "You’re eligible for a new offer...",
       "timestamp": "2025-05-24T20:00:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": true
     },
     {
@@ -438,7 +438,7 @@
       "subject": "Don't miss out!",
       "preview": "Your account has been updated...",
       "timestamp": "2025-05-24T20:10:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": true
     },
     {
@@ -447,7 +447,7 @@
       "subject": "Thank you!",
       "preview": "Join us for an exclusive event...",
       "timestamp": "2025-05-24T20:20:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": false
     },
     {
@@ -456,7 +456,7 @@
       "subject": "Don't miss out!",
       "preview": "Catch up on the latest updates...",
       "timestamp": "2025-05-24T20:30:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": true
     },
     {
@@ -465,7 +465,7 @@
       "subject": "Thank you!",
       "preview": "Help us improve with your feedback...",
       "timestamp": "2025-05-24T20:40:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": true
     },
     {
@@ -483,7 +483,7 @@
       "subject": "Survey request",
       "preview": "Help us improve with your feedback...",
       "timestamp": "2025-05-24T21:00:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": false
     },
     {
@@ -492,7 +492,7 @@
       "subject": "Survey request",
       "preview": "Help us improve with your feedback...",
       "timestamp": "2025-05-24T21:10:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": true
     },
     {
@@ -501,7 +501,7 @@
       "subject": "You're invited",
       "preview": "Join us for an exclusive event...",
       "timestamp": "2025-05-24T21:20:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": false
     },
     {
@@ -519,7 +519,7 @@
       "subject": "Action required",
       "preview": "Catch up on the latest updates...",
       "timestamp": "2025-05-24T21:40:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": true
     },
     {
@@ -528,7 +528,7 @@
       "subject": "Quick update",
       "preview": "Please confirm your details...",
       "timestamp": "2025-05-24T21:50:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": false
     },
     {
@@ -537,7 +537,7 @@
       "subject": "Survey request",
       "preview": "Your account has been updated...",
       "timestamp": "2025-05-24T22:00:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": false
     },
     {
@@ -546,7 +546,7 @@
       "subject": "Quick update",
       "preview": "Join us for an exclusive event...",
       "timestamp": "2025-05-24T22:10:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": true
     },
     {
@@ -555,7 +555,7 @@
       "subject": "Here's what you missed",
       "preview": "Catch up on the latest updates...",
       "timestamp": "2025-05-24T22:20:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": true
     },
     {
@@ -564,7 +564,7 @@
       "subject": "Check this out",
       "preview": "Act now to avoid missing out...",
       "timestamp": "2025-05-24T22:30:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": false
     },
     {
@@ -573,25 +573,25 @@
       "subject": "Here's what you missed",
       "preview": "We wanted to say thanks...",
       "timestamp": "2025-05-24T22:40:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": true
     },
     {
       "id": "65",
       "sender": "Ava Smith",
       "subject": "Action required",
-      "preview": "You\u2019re eligible for a new offer...",
+      "preview": "You’re eligible for a new offer...",
       "timestamp": "2025-05-24T22:50:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": false
     },
     {
       "id": "66",
       "sender": "Sophia Jones",
       "subject": "Latest news",
-      "preview": "You\u2019re eligible for a new offer...",
+      "preview": "You’re eligible for a new offer...",
       "timestamp": "2025-05-24T23:00:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": false
     },
     {
@@ -600,7 +600,7 @@
       "subject": "Thank you!",
       "preview": "Your account has been updated...",
       "timestamp": "2025-05-24T23:10:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": true
     },
     {
@@ -618,7 +618,7 @@
       "subject": "Latest news",
       "preview": "Please confirm your details...",
       "timestamp": "2025-05-24T23:30:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": false
     },
     {
@@ -636,7 +636,7 @@
       "subject": "Action required",
       "preview": "Catch up on the latest updates...",
       "timestamp": "2025-05-24T23:50:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": true
     },
     {
@@ -645,7 +645,7 @@
       "subject": "Latest news",
       "preview": "Act now to avoid missing out...",
       "timestamp": "2025-05-25T00:00:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": false
     },
     {
@@ -663,7 +663,7 @@
       "subject": "You're invited",
       "preview": "We wanted to say thanks...",
       "timestamp": "2025-05-25T00:20:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": false
     },
     {
@@ -681,7 +681,7 @@
       "subject": "Survey request",
       "preview": "Please confirm your details...",
       "timestamp": "2025-05-25T00:40:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": false
     },
     {
@@ -699,7 +699,7 @@
       "subject": "You're invited",
       "preview": "Help us improve with your feedback...",
       "timestamp": "2025-05-25T01:00:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": false
     },
     {
@@ -708,7 +708,7 @@
       "subject": "Important info",
       "preview": "We wanted to say thanks...",
       "timestamp": "2025-05-25T01:10:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": true
     },
     {
@@ -717,7 +717,7 @@
       "subject": "Important info",
       "preview": "Your account has been updated...",
       "timestamp": "2025-05-25T01:20:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": false
     },
     {
@@ -735,7 +735,7 @@
       "subject": "Check this out",
       "preview": "Act now to avoid missing out...",
       "timestamp": "2025-05-25T01:40:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": true
     },
     {
@@ -744,7 +744,7 @@
       "subject": "Latest news",
       "preview": "Act now to avoid missing out...",
       "timestamp": "2025-05-25T01:50:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": false
     },
     {
@@ -753,14 +753,14 @@
       "subject": "Important info",
       "preview": "Act now to avoid missing out...",
       "timestamp": "2025-05-25T02:00:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": false
     },
     {
       "id": "85",
       "sender": "James Jones",
       "subject": "Here's what you missed",
-      "preview": "You\u2019re eligible for a new offer...",
+      "preview": "You’re eligible for a new offer...",
       "timestamp": "2025-05-25T02:10:00Z",
       "body": "Hello,\n\nThis is a sample email body. It contains standard content for testing and demo purposes.\n\nRegards,\nTeam",
       "unread": false
@@ -771,7 +771,7 @@
       "subject": "Important info",
       "preview": "Please confirm your details...",
       "timestamp": "2025-05-25T02:20:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": false
     },
     {
@@ -780,7 +780,7 @@
       "subject": "Action required",
       "preview": "Help us improve with your feedback...",
       "timestamp": "2025-05-25T02:30:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": true
     },
     {
@@ -789,16 +789,16 @@
       "subject": "Important info",
       "preview": "Please confirm your details...",
       "timestamp": "2025-05-25T02:40:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": false
     },
     {
       "id": "89",
       "sender": "Noah Williams",
       "subject": "Check this out",
-      "preview": "You\u2019re eligible for a new offer...",
+      "preview": "You’re eligible for a new offer...",
       "timestamp": "2025-05-25T02:50:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": true
     },
     {
@@ -807,16 +807,16 @@
       "subject": "Important info",
       "preview": "Read about the newest changes...",
       "timestamp": "2025-05-25T03:00:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": true
     },
     {
       "id": "91",
       "sender": "Elijah Johnson",
       "subject": "Here's what you missed",
-      "preview": "You\u2019re eligible for a new offer...",
+      "preview": "You’re eligible for a new offer...",
       "timestamp": "2025-05-25T03:10:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": true
     },
     {
@@ -825,7 +825,7 @@
       "subject": "Thank you!",
       "preview": "We wanted to say thanks...",
       "timestamp": "2025-05-25T03:20:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": false
     },
     {
@@ -852,7 +852,7 @@
       "subject": "Important info",
       "preview": "Join us for an exclusive event...",
       "timestamp": "2025-05-25T03:50:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": false
     },
     {
@@ -861,7 +861,7 @@
       "subject": "Thank you!",
       "preview": "Help us improve with your feedback...",
       "timestamp": "2025-05-25T04:00:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": false
     },
     {
@@ -870,7 +870,7 @@
       "subject": "Check this out",
       "preview": "Your account has been updated...",
       "timestamp": "2025-05-25T04:10:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": true
     },
     {
@@ -879,7 +879,7 @@
       "subject": "Latest news",
       "preview": "Join us for an exclusive event...",
       "timestamp": "2025-05-25T04:20:00Z",
-      "body": "Dear User,\n\nWe appreciate your support. Don\u2019t forget to check out our latest offerings.\n\nCheers,\nThe Team",
+      "body": "Dear User,\n\nWe appreciate your support. Don’t forget to check out our latest offerings.\n\nCheers,\nThe Team",
       "unread": false
     },
     {
@@ -897,7 +897,7 @@
       "subject": "Don't miss out!",
       "preview": "Act now to avoid missing out...",
       "timestamp": "2025-05-25T04:40:00Z",
-      "body": "Hi there,\n\nPlease take a moment to review your settings. We\u2019ve made a few updates recently.\n\nThanks,\nSupport",
+      "body": "Hi there,\n\nPlease take a moment to review your settings. We’ve made a few updates recently.\n\nThanks,\nSupport",
       "unread": false
     }
   ]

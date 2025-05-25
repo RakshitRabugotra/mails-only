@@ -1,6 +1,6 @@
 import { StackScreenProps } from "@react-navigation/stack"
 import moment from "moment"
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useState } from "react"
 import { View, ScrollView, StyleSheet, TextInput } from "react-native"
 import {
   Text,
@@ -13,18 +13,20 @@ import {
 } from "react-native-paper"
 import { RootStackParamList } from "../navigations/RootNavigator"
 import { ExtendedMail } from "../types"
-import { getMailFromID } from "../services"
+import { getMailFromID, updateMailFromID } from "../services"
 
 type Props = StackScreenProps<RootStackParamList, "MailDetail">
 
 const MailDetailScreen: React.FC<Props> = ({ route, navigation }) => {
+  const { mailId } = route.params
+
   const theme = useTheme()
 
-  const [menuVisible, setMenuVisible] = useState(false)
+  // State variable
   const [mail, setMail] = useState<ExtendedMail | null>(null)
-  const [isLoading, setLoading] = useState(false)
 
-  const { mailId } = route.params
+  const [isLoading, setLoading] = useState(false)
+  const [menuVisible, setMenuVisible] = useState(false)
 
   // The formatted time from the mail
   const formattedTime = useMemo(
@@ -32,6 +34,7 @@ const MailDetailScreen: React.FC<Props> = ({ route, navigation }) => {
     [mail]
   )
 
+  // Fetch the email to show on the page
   useEffect(() => {
     if (isLoading) return
     // Start fetching the email
@@ -53,6 +56,26 @@ const MailDetailScreen: React.FC<Props> = ({ route, navigation }) => {
       )
       .finally(() => setLoading(false))
   }, [mailId])
+
+  // mark the email as unread
+  const handleMarkUnread = useCallback(() => {
+    if (!mail || isLoading) return
+
+    setMenuVisible(false)
+    updateMailFromID(mail.id, { ...mail, unread: true })
+      .then(({ error }) => {
+        if (error) throw error
+      })
+      .catch(err =>
+        console.error(
+          "error while marking mail as read: " + (err as Error).message
+        )
+      )
+      // Re-route to the home screen
+      .finally(() => {
+        navigation.push("Drawer")
+      })
+  }, [mail, isLoading])
 
   if (isLoading || mail === null) {
     return (
@@ -83,7 +106,7 @@ const MailDetailScreen: React.FC<Props> = ({ route, navigation }) => {
               />
             }
           >
-            <Menu.Item onPress={() => {}} title="Mark as unread" />
+            <Menu.Item onPress={handleMarkUnread} title="Mark as unread" />
             <Menu.Item onPress={() => {}} title="Move to" />
             <Menu.Item onPress={() => {}} title="Report spam" />
           </Menu>

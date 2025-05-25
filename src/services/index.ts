@@ -1,29 +1,31 @@
 import { ExtendedMail } from "../types"
-import { APIResponse } from "../types/services"
+import { APIErrorResponse, APIResponse } from "../types/services"
 import { mailFetch } from "./mail"
 
 /**
  * Request to get all the mails (paginated only)
  */
 type PaginatedMail = {
-  "first": number,
-  "prev": number | null,
-  "next": number | null,
-  "last": number,
-  "pages": number,
-  "items": number,
-  "data": ExtendedMail[]
+  first: number
+  prev: number | null
+  next: number | null
+  last: number
+  pages: number
+  items: number
+  data: ExtendedMail[]
 }
 
 export const getPaginatedMails = async (
   page: number,
   perPage = 10
 ): Promise<APIResponse<PaginatedMail>> => {
-  const result = { data: null, error: null } as APIResponse<PaginatedMail>
+  const result: APIResponse<PaginatedMail> = { data: null, error: null }
 
   // Try to fetch the emails
   try {
-    const resp = await mailFetch(`/?_page=${Math.max(1, page)}&_per_page=${perPage}`)
+    const resp = await mailFetch(
+      `/?_page=${Math.max(1, page)}&_per_page=${perPage}`
+    )
     console.log(resp.url)
     if (resp.ok) {
       result.data = await resp.json()
@@ -40,7 +42,7 @@ export const getPaginatedMails = async (
 export const getMailFromID = async (
   mailId: string
 ): Promise<APIResponse<ExtendedMail>> => {
-  const result = { data: null, error: null } as APIResponse<ExtendedMail>
+  const result: APIResponse<ExtendedMail> = { data: null, error: null }
 
   // Try to fetch the email
   try {
@@ -56,4 +58,25 @@ export const getMailFromID = async (
     result.error = error as Error
     return result
   }
-} 
+}
+
+/**
+ * Update the mail
+ */
+export const updateMailFromID = async (
+  mailId: string,
+  newMail: ExtendedMail
+): Promise<APIErrorResponse> => {
+  const result: APIErrorResponse = { error: null }
+
+  try {
+    const resp = await mailFetch(`/${mailId}`, {
+      method: "PUT",
+      body: JSON.stringify(newMail),
+    })
+    if (!resp.ok) throw new Error("Error updating the mail-id: " + mailId)
+  } catch (error) {
+    result.error = error as Error
+  }
+  return result
+}
