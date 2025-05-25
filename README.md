@@ -92,3 +92,23 @@ You can now use the app and interact with the mock backend over the internet via
 
 ## 📄 License
 This project is for educational and personal use only.
+
+---
+
+## Tech Stack
+- React Native
+- React Native paper
+- React Navigation
+- Mock backend with `json-server`
+
+---
+
+## Features Implemented
+- Use of Material Theme and Icons (to stay true to design philosophy)
+- Drawer navigation between screens
+- Transition between search screen and inbox
+- Ability to change the backend-uri in the given setup through the `Meet-Screen`
+- Ability to select emails (The animation of background and icon from Gmail)
+- Ability to read/unread mails
+- Ability to delete mails
+- Infinite scroll for emails
