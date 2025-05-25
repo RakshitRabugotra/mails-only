@@ -6,7 +6,6 @@ import { DrawerActions } from "@react-navigation/native"
 import useTheme from "../hooks/use-theme"
 import { StackNavigationProp } from "@react-navigation/stack"
 import { RootStackParamList } from "../navigations/RootNavigator"
-import { SharedElement } from "react-navigation-shared-element"
 import Images from "../constants/Images"
 
 export default function AppBarWithSearch() {
@@ -24,11 +23,10 @@ export default function AppBarWithSearch() {
         icon="menu"
         onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
       />
-      <SharedElement id="searchBar" style={styles.searchContainer}>
-        <TouchableOpacity style={styles.searchContainer} onPress={goToSearch}>
-          <Text style={styles.searchPlaceholder}>Search in emails</Text>
-        </TouchableOpacity>
-      </SharedElement>
+
+      <TouchableOpacity style={styles.searchContainer} onPress={goToSearch}>
+        <Text style={styles.searchPlaceholder}>Search in emails</Text>
+      </TouchableOpacity>
 
       <Avatar.Image
         size={32}

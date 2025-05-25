@@ -2,7 +2,7 @@ import DrawerNavigator from "./DrawerNavigator"
 import MailDetailScreen from "../screens/MailDetailScreen"
 import OnboardingScreen from "../screens/OnboardingScreen"
 import SearchScreen from "../screens/SearchScreen"
-import { createSharedElementStackNavigator } from "react-navigation-shared-element"
+import { createStackNavigator } from "@react-navigation/stack"
 
 export type RootStackParamList = {
   Onboarding: undefined
@@ -11,7 +11,7 @@ export type RootStackParamList = {
   MailDetail: { mailId: string }
 }
 
-const Stack = createSharedElementStackNavigator<RootStackParamList>()
+const Stack = createStackNavigator<RootStackParamList>()
 
 export default function RootNavigator() {
   return (
@@ -24,7 +24,6 @@ export default function RootNavigator() {
       <Stack.Screen
         name="SearchMail"
         component={SearchScreen}
-        sharedElements={() => ["searchBar"]}
         options={{
           headerShown: false,
           gestureEnabled: false,

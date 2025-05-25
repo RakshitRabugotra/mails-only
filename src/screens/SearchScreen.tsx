@@ -3,7 +3,6 @@ import { View, StyleSheet, TextInput, Animated } from "react-native"
 import { IconButton } from "react-native-paper"
 import { useNavigation } from "@react-navigation/native"
 import useTheme from "../hooks/use-theme"
-import { SharedElement } from "react-navigation-shared-element"
 import { ExtendedMail } from "../types"
 
 // To debounce the search
@@ -15,8 +14,8 @@ export default function SearchScreen() {
 
   // State variables
   const [searchQuery, setSearchQuery] = useState("")
-  const [results, setResults] = useState<ExtendedMail[]>([]);
-  const [isLoading, setLoading] = useState(false);
+  const [results, setResults] = useState<ExtendedMail[]>([])
+  const [isLoading, setLoading] = useState(false)
 
   // Debounced search function
   const debouncedSearch = useCallback(
@@ -40,10 +39,13 @@ export default function SearchScreen() {
     []
   )
 
-  const handleChange = useCallback((text: string) => {
-    setSearchQuery(text)
-    debouncedSearch(text)
-  }, [setSearchQuery, debouncedSearch])
+  const handleChange = useCallback(
+    (text: string) => {
+      setSearchQuery(text)
+      debouncedSearch(text)
+    },
+    [setSearchQuery, debouncedSearch]
+  )
 
   // Animation variables
   const fadeAnim = useRef(new Animated.Value(0)).current
@@ -58,30 +60,29 @@ export default function SearchScreen() {
 
   return (
     <Animated.View style={(styles.container, { opacity: fadeAnim })}>
-      <SharedElement id="searchBar">
-        <View
-          style={[
-            styles.searchBarContainer,
-            { backgroundColor: theme.colors.card },
-          ]}
-        >
-          <IconButton icon="arrow-left" onPress={() => navigation.goBack()} />
-          <TextInput
-            autoFocus
-            placeholder="Search in emails"
-            value={searchQuery}
-            onChangeText={handleChange}
-            style={styles.input}
-            placeholderTextColor="#888"
-          />
-        </View>
-      </SharedElement>
+      <View
+        style={[
+          styles.searchBarContainer,
+          { backgroundColor: theme.colors.card },
+        ]}
+      >
+        <IconButton icon="arrow-left" onPress={() => navigation.goBack()} />
+        <TextInput
+          autoFocus
+          placeholder="Search in emails"
+          value={searchQuery}
+          onChangeText={handleChange}
+          style={styles.input}
+          placeholderTextColor="#888"
+        />
+      </View>
+
       {/* Future: Search Results Below */}
     </Animated.View>
   )
 }
 
-SearchScreen.sharedElements = () => ['searchBar']
+SearchScreen.sharedElements = () => ["searchBar"]
 
 const styles = StyleSheet.create({
   container: {
