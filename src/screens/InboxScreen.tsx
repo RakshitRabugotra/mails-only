@@ -7,7 +7,7 @@ import { StackNavigationProp } from "@react-navigation/stack"
 import { RootStackParamList } from "../navigations/RootNavigator"
 import { ExtendedMail } from "../types"
 import { getPaginatedMails } from "../services"
-import { ActivityIndicator, Text } from "react-native-paper"
+import { ActivityIndicator, Button, Text } from "react-native-paper"
 
 interface InboxScreenProps {
   navigation: StackNavigationProp<RootStackParamList, "Drawer">
@@ -28,6 +28,7 @@ export default function InboxScreen({ navigation }: InboxScreenProps) {
   // )
   // To show loading state
   const [isLoading, setLoading] = useState(false)
+  const [showRefresh, setShowRefresh] = useState(false)
 
   // The list of selected mails
   const [mails, setMails] = useState<ExtendedMail[] | null>(null)
@@ -73,6 +74,7 @@ export default function InboxScreen({ navigation }: InboxScreenProps) {
 
       if (!data || error) {
         // There was some error in fetching the data
+        setShowRefresh(true)
         return setLoading(false)
       }
 
@@ -82,6 +84,8 @@ export default function InboxScreen({ navigation }: InboxScreenProps) {
         const newMails = data.data.filter(mail => !existingIds.has(mail.id))
         return prev ? [...prev, ...newMails] : newMails
       })
+
+      setShowRefresh(false)
       // Check if we have more pages
       setHasMore(data.next !== null)
       // Stop the loading
@@ -102,6 +106,8 @@ export default function InboxScreen({ navigation }: InboxScreenProps) {
     setHasMore(true)
     setLoading(false)
     setPage(1)
+    // If defined, call the callback
+    fetchMail(page)
   }, [])
 
   // Fetch all the mails, in paginated way
@@ -123,7 +129,17 @@ export default function InboxScreen({ navigation }: InboxScreenProps) {
             justifyContent: "center",
           }}
         >
-          <ActivityIndicator size="large" />
+          {showRefresh ? (
+            <Button
+              mode="outlined"
+              onPress={refreshMails}
+              contentStyle={{ paddingVertical: 6 }}
+            >
+              Refresh
+            </Button>
+          ) : (
+            <ActivityIndicator size="large" />
+          )}
         </View>
       ) : (
         <FlatList
