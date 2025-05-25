@@ -1,6 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react"
 import { View, StyleSheet } from "react-native"
-import { Text, Button, TextInput, ActivityIndicator } from "react-native-paper"
+import {
+  Text,
+  Button,
+  TextInput,
+  ActivityIndicator,
+  Snackbar,
+} from "react-native-paper"
 
 import { getBackendUri, updateBackendUri } from "../services/storage"
 
@@ -8,20 +14,33 @@ export default function MeetScreen() {
   const [backendUri, setBackendUri] = useState<string | null>(null)
   const [isLoading, setLoading] = useState(false)
 
+  // To handle the snackbar
+  const [visible, setVisible] = useState(false)
+  const [statusText, setStatusText] = useState("")
+
+  const onShowSnackBar = useCallback(() => setVisible(!visible), [visible])
+
+  const onDismissSnackBar = useCallback(() => setVisible(false), [])
+
   const handleUpdate = useCallback(() => {
     if (!backendUri) return
 
     setLoading(true)
     updateBackendUri(backendUri)
-      .then(err => {
-        throw err
+      .then(({ error }) => {
+        if (error !== null) throw error
+        setStatusText("Backend URI updated successfully!")
       })
       .catch(err => {
-        console.error(
+        const msg =
           "Error while updating the backend-uri: " + (err as Error).message
-        )
+        console.error(msg)
+        setStatusText(msg)
       })
-      .finally(() => setLoading(false))
+      .finally(() => {
+        setLoading(false)
+        onShowSnackBar()
+      })
   }, [backendUri])
 
   useEffect(() => {
@@ -29,8 +48,10 @@ export default function MeetScreen() {
     getBackendUri()
       .then(({ backendUri: data, error }) => {
         // If we don't have the data
-        if (!data || error) {
-          throw error || "Error while fetching backend-uri from async storage"
+        if (!data)
+          throw new Error("Error while fetching backend-uri from async storage")
+        if (error) {
+          throw error
         }
         // Set the backend uri
         setBackendUri(data)
@@ -49,7 +70,7 @@ export default function MeetScreen() {
 
       {backendUri !== null ? (
         <>
-          <View>
+          <View style={{ paddingHorizontal: 24 }}>
             <TextInput
               placeholder="https://abc.xyz"
               label={"Backend URI"}
@@ -78,6 +99,21 @@ export default function MeetScreen() {
       ) : (
         <ActivityIndicator size={"large"} />
       )}
+
+      {/* Snackbar to show the text */}
+      <Snackbar
+        visible={visible}
+        onDismiss={onDismissSnackBar}
+        wrapperStyle={{
+          alignSelf: "center",
+        }}
+        action={{
+          label: "Dismiss",
+          onPress: onDismissSnackBar,
+        }}
+      >
+        {statusText}
+      </Snackbar>
     </View>
   )
 }
@@ -86,7 +122,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    padding: 24,
+    paddingVertical: 24,
     backgroundColor: "#fff",
   },
   title: {
@@ -94,12 +130,14 @@ const styles = StyleSheet.create({
     fontWeight: "900",
     fontSize: 16,
     fontFamily: "Inter",
+    paddingHorizontal: 24,
     marginBottom: 12,
     color: "#000",
   },
   subtitle: {
     textAlign: "center",
     color: "#6c6c6c",
+    paddingHorizontal: 24,
     marginBottom: 32,
   },
   button: {
