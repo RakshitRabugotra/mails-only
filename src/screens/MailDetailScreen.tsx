@@ -41,7 +41,9 @@ const MailDetailScreen: React.FC<Props> = ({ route, navigation }) => {
       .then(({ data, error }) => {
         if (!data || error) {
           console.error("Error while fetching data in MailDetailScreen")
-          throw error || -1
+          if (!data)
+            throw new Error("Error while fetching data in MailDetailScreen")
+          throw error
         }
         // Set the mail
         setMail(data)
