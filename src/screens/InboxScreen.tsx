@@ -14,18 +14,8 @@ interface InboxScreenProps {
 }
 
 export default function InboxScreen({ navigation }: InboxScreenProps) {
-  const [searchQuery, setSearchQuery] = useState("")
+  // const [searchQuery, setSearchQuery] = useState("")
 
-  // const mails = useMemo(
-  //   () =>
-  //     mailsData.filter(
-  //       mail =>
-  //         mail.sender.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  //         mail.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  //         mail.preview.toLowerCase().includes(searchQuery.toLowerCase())
-  //     ),
-  //   [mailsData]
-  // )
   // To show loading state
   const [isLoading, setLoading] = useState(false)
   const [showRefresh, setShowRefresh] = useState(false)
@@ -117,10 +107,7 @@ export default function InboxScreen({ navigation }: InboxScreenProps) {
 
   return (
     <View style={styles.container}>
-      <AppBarWithSearch
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-      />
+      <AppBarWithSearch />
       {mails === null ? (
         <View
           style={{

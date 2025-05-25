@@ -1,15 +1,17 @@
-import { createStackNavigator } from '@react-navigation/stack';
-import DrawerNavigator from './DrawerNavigator';
-import MailDetailScreen from '../screens/MailDetailScreen';
+import DrawerNavigator from "./DrawerNavigator"
+import MailDetailScreen from "../screens/MailDetailScreen"
 import OnboardingScreen from "../screens/OnboardingScreen"
+import SearchScreen from "../screens/SearchScreen"
+import { createSharedElementStackNavigator } from "react-navigation-shared-element"
 
 export type RootStackParamList = {
   Onboarding: undefined
   Drawer: undefined
+  SearchMail: undefined
   MailDetail: { mailId: string }
 }
 
-const Stack = createStackNavigator<RootStackParamList>()
+const Stack = createSharedElementStackNavigator<RootStackParamList>()
 
 export default function RootNavigator() {
   return (
@@ -19,6 +21,21 @@ export default function RootNavigator() {
     >
       <Stack.Screen name="Onboarding" component={OnboardingScreen} />
       <Stack.Screen name="Drawer" component={DrawerNavigator} />
+      <Stack.Screen
+        name="SearchMail"
+        component={SearchScreen}
+        sharedElements={() => ["searchBar"]}
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
+          animation: "fade", // prevents pop animation
+          cardStyleInterpolator: () => ({
+            cardStyle: {
+              opacity: 1,
+            },
+          }),
+        }}
+      />
       <Stack.Screen name="MailDetail" component={MailDetailScreen} />
     </Stack.Navigator>
   )

@@ -1,29 +1,39 @@
 import React from "react"
-import { StyleSheet, TextInput, View } from "react-native"
-import { Avatar, IconButton } from "react-native-paper"
+import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native"
+import { Avatar, IconButton, Text } from "react-native-paper"
 import { useNavigation } from "@react-navigation/native"
 import { DrawerActions } from "@react-navigation/native"
 import useTheme from "../hooks/use-theme"
+import { StackNavigationProp } from "@react-navigation/stack"
+import { RootStackParamList } from "../navigations/RootNavigator"
+import { SharedElement } from "react-navigation-shared-element"
 
 interface AppBarWithSearchProps {
-  searchQuery: string
-  setSearchQuery: (query: string) => void
+  // searchQuery: string
+  // setSearchQuery: (query: string) => void
 }
 
-export default function AppBarWithSearch({
-  searchQuery,
-  setSearchQuery,
-}: AppBarWithSearchProps) {
-  const navigation = useNavigation()
-  const theme = useTheme();
+export default function AppBarWithSearch({}: AppBarWithSearchProps) {
+  const navigation =
+    useNavigation<StackNavigationProp<RootStackParamList, "SearchMail">>()
+  const theme = useTheme()
+
+  const goToSearch = () => {
+    navigation.navigate("SearchMail") // You must define this screen in your navigator
+  }
 
   return (
-    <View style={[styles.header, {backgroundColor: theme.colors.primaryContainer}]}>
+    <View
+      style={[
+        styles.header,
+        { backgroundColor: theme.colors.primaryContainer },
+      ]}
+    >
       <IconButton
         icon="menu"
         onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
       />
-      <View style={styles.searchContainer}>
+      {/* <View style={styles.searchContainer}>
         <TextInput
           placeholder="Search in emails"
           value={searchQuery}
@@ -32,7 +42,13 @@ export default function AppBarWithSearch({
           placeholderTextColor={'#000'}
           // inputStyle={{ fontSize: 14, minHeight: 0 }}
         />
-      </View>
+      </View> */}
+      <SharedElement id="searchBar" style={styles.searchContainer}>
+        <TouchableOpacity style={styles.searchContainer} onPress={goToSearch}>
+          <Text style={styles.searchPlaceholder}>Search in emails</Text>
+        </TouchableOpacity>
+      </SharedElement>
+
       <Avatar.Image
         size={32}
         source={{
@@ -46,22 +62,27 @@ export default function AppBarWithSearch({
 
 const styles = StyleSheet.create({
   header: {
-    alignItems: 'center',
+    alignItems: "center",
     display: "flex",
     flexDirection: "row",
     backgroundColor: "white",
     marginVertical: 10,
     marginHorizontal: 16,
-    borderRadius: 25
+    borderRadius: 25,
   },
   searchContainer: {
     flex: 1,
+    justifyContent: "center",
   },
   searchbar: {
     height: 55,
-    color: 'black',
+    color: "black",
     fontSize: 15,
-    backgroundColor: 'transparent',
-    borderRadius: 20
+    backgroundColor: "transparent",
+    borderRadius: 20,
+  },
+  searchPlaceholder: {
+    fontSize: 15,
+    color: "#666",
   },
 })
