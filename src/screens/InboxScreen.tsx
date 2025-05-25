@@ -105,25 +105,27 @@ export default function InboxScreen({ navigation }: InboxScreenProps) {
     (mail: ExtendedMail) => {
       if (!mail) return
       // Start marking as read
-      updateMailFromID(mail.id, { ...mail, unread: false })
-        .then(({ error }) => {
-          if (error) throw error
-          // Update the local instance
-          setMails(prev =>
-            prev
-              ? prev.map(value =>
-                  value.id === mail.id ? { ...value, unread: false } : value
-                )
-              : null
+      if (mail.unread) {
+        updateMailFromID(mail.id, { ...mail, unread: false })
+          .then(({ error }) => {
+            if (error) throw error
+            // Update the local instance
+            setMails(prev =>
+              prev
+                ? prev.map(value =>
+                    value.id === mail.id ? { ...value, unread: false } : value
+                  )
+                : null
+            )
+          })
+          .catch(err =>
+            console.error(
+              "error while marking mail as read: " + (err as Error).message
+            )
           )
-        })
-        .catch(err =>
-          console.error(
-            "error while marking mail as read: " + (err as Error).message
-          )
-        )
-        // Re-route to the detail screen
-        .finally(() => navigation.push("MailDetail", { mailId: mail.id }))
+      }
+      // Re-route to the detail screen
+      navigation.push("MailDetail", { mailId: mail.id })
     },
     [setMails]
   )

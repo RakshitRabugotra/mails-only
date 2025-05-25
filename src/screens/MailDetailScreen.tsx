@@ -26,7 +26,6 @@ const MailDetailScreen: React.FC<Props> = ({ route, navigation }) => {
   const [mail, setMail] = useState<ExtendedMail | null>(null)
 
   const [isLoading, setLoading] = useState(false)
-  const [menuVisible, setMenuVisible] = useState(false)
 
   // The formatted time from the mail
   const formattedTime = useMemo(
@@ -34,9 +33,15 @@ const MailDetailScreen: React.FC<Props> = ({ route, navigation }) => {
     [mail]
   )
 
+  // Control the menu behaviour
+  const [menuVisible, setMenuVisible] = useState(false)
+
+  const openMenu = useCallback(() => setMenuVisible(true), [])
+  const closeMenu = useCallback(() => setMenuVisible(false), [])
+
   // Fetch the email to show on the page
   useEffect(() => {
-    if (isLoading) return
+    if (isLoading || mail || !mailId.trim()) return
     // Start fetching the email
     setLoading(true)
     // Get teh single mail
@@ -61,7 +66,7 @@ const MailDetailScreen: React.FC<Props> = ({ route, navigation }) => {
   const handleMarkUnread = useCallback(() => {
     if (!mail || isLoading) return
 
-    setMenuVisible(false)
+    closeMenu
     updateMailFromID(mail.id, { ...mail, unread: true })
       .then(({ error }) => {
         if (error) throw error
@@ -98,13 +103,8 @@ const MailDetailScreen: React.FC<Props> = ({ route, navigation }) => {
         >
           <Menu
             visible={menuVisible}
-            onDismiss={() => setMenuVisible(false)}
-            anchor={
-              <Appbar.Action
-                icon="dots-vertical"
-                onPress={() => setMenuVisible(true)}
-              />
-            }
+            onDismiss={closeMenu}
+            anchor={<Appbar.Action icon="dots-vertical" onPress={openMenu} />}
           >
             <Menu.Item onPress={handleMarkUnread} title="Mark as unread" />
             <Menu.Item onPress={() => {}} title="Move to" />

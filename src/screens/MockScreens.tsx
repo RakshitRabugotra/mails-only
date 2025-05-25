@@ -10,14 +10,9 @@ interface MockScreenProps {
 }
 
 export default function MockScreen({ navigation }: MockScreenProps) {
-  const [searchQuery, setSearchQuery] = useState("")
-
   return (
-    <View style={{ padding: 20, flex: 1 }}>
-      <AppBarWithSearch
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-      />
+    <View style={{ flex: 1 }}>
+      <AppBarWithSearch />
       <View
         style={{
           flex: 1,
