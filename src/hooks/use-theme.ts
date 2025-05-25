@@ -21,6 +21,6 @@ const CombinedDarkTheme = merge(MD3DarkTheme, DarkTheme)
 
 export default function useTheme() {
   const colorScheme = useColorScheme()
-  // return colorScheme === "dark" ? CombinedDarkTheme : CombinedDefaultTheme
-  return CombinedDefaultTheme
+  return colorScheme === "dark" ? CombinedDarkTheme : CombinedDefaultTheme
+  // return CombinedDefaultTheme
 }

@@ -145,19 +145,31 @@ const MailDetailScreen: React.FC<Props> = ({ route, navigation }) => {
         </View>
       </Appbar.Header>
 
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView
+        contentContainerStyle={[
+          styles.container,
+          { backgroundColor: theme.colors.background },
+        ]}
+      >
         <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
           <View style={{ flex: 1 }}>
             <Text variant="titleLarge" style={styles.subject}>
               {mail.subject}
             </Text>
-            <View style={styles.labelContainer}>
-              <Text style={styles.label}>Inbox</Text>
+            <View
+              style={[
+                styles.labelContainer,
+                { backgroundColor: theme.colors.elevation.level3 },
+              ]}
+            >
+              <Text style={[styles.label, { color: theme.colors.outline }]}>
+                Inbox
+              </Text>
             </View>
           </View>
           <StarStateIcon
             isActive={mail.important ?? false}
-            iconProps={{ size: 26 }}
+            iconProps={{ size: 26, color: theme.colors.outline }}
           />
         </View>
 
@@ -189,9 +201,22 @@ const MailDetailScreen: React.FC<Props> = ({ route, navigation }) => {
       </ScrollView>
 
       {/* Bottom input area mock (non-functional) */}
-      <View style={styles.replyBar}>
-        <PaperclipIcon />
-        <View style={styles.inputContainer}>
+      <View
+        style={[
+          styles.replyBar,
+          {
+            borderColor: theme.colors.backdrop,
+            backgroundColor: theme.colors.surface,
+          },
+        ]}
+      >
+        <PaperclipIcon color={theme.colors.outline} />
+        <View
+          style={[
+            styles.inputContainer,
+            { backgroundColor: theme.colors.elevation.level3 },
+          ]}
+        >
           <View
             style={{
               flexDirection: "row",
@@ -199,11 +224,11 @@ const MailDetailScreen: React.FC<Props> = ({ route, navigation }) => {
               marginRight: 4,
             }}
           >
-            <ReplyIcon />
-            <ChevronDownIcon size={12} />
+            <ReplyIcon color={theme.colors.outline} />
+            <ChevronDownIcon size={12} color={theme.colors.outline} />
           </View>
           <TextInput
-            style={styles.replyInput}
+            style={[styles.replyInput]}
             placeholder="Reply"
             placeholderTextColor={"#aaa"}
           />
@@ -263,18 +288,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderTopWidth: 1,
-    borderColor: "#e0e0e0",
-    backgroundColor: "#fafafa",
   },
   inputContainer: {
     flex: 1,
     flexDirection: "row",
-    backgroundColor: "#f2f2f2",
+
     borderRadius: 20,
     paddingHorizontal: 16,
-    marginRight: 8,
+    marginHorizontal: 8,
   },
   replyInput: {
     paddingVertical: 8,
+    height: 40,
   },
 })
