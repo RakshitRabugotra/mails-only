@@ -70,11 +70,11 @@ const MailDetailScreen: React.FC<Props> = ({ route, navigation }) => {
 
   // mark the email as unread
   const handleMarkUnread = useCallback(() => {
+    // Close the menu first
+    closeMenu()
     if (!mail || isLoading) return
     // If already unread, skip to navigation
     if (mail.unread) return navigation.push("Drawer")
-    // Close the menu first
-    closeMenu()
 
     updateMailFromID(mail.id, { ...mail, unread: true })
       .then(({ error }) => {

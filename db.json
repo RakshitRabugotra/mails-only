@@ -16,7 +16,7 @@
       "preview": "Here’s your roundup of the week...",
       "timestamp": "2025-05-23T15:45:00Z",
       "body": "Hello subscriber,\n\nHere’s your roundup of the week’s top stories and insights.\n\nWarm regards,\nNewsletter Team",
-      "unread": true
+      "unread": false
     },
     {
       "id": "5",
@@ -43,7 +43,7 @@
       "preview": "We’ve made some exciting changes...",
       "timestamp": "2025-05-24T11:22:00Z",
       "body": "Hi there,\n\nWe’ve made some exciting updates to our product. Check out what’s new in the latest release!\n\nCheers,\nThe Product Team",
-      "unread": true
+      "unread": false
     },
     {
       "id": "8",
