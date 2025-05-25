@@ -13,133 +13,136 @@ import {
   TouchableOpacity,
   View,
 } from "react-native"
-import { Mail } from "../data/mails"
 import useTheme from "../hooks/use-theme"
 import { StarStateIcon } from "./icons"
+import { ExtendedMail } from "../types"
 
 type StackNavigation = StackNavigationProp<RootStackParamList, "MailDetail">
 
 export interface EmailCardProps {
-  mail: Mail
-  isSelected?: boolean
-  onSelect: (mail: Mail) => void
-  onDeselect: (mail: Mail) => void
-  onPress: (mail: Mail) => void
+  mail: ExtendedMail
+  onSelect: (mail: ExtendedMail) => void
+  onDeselect: (mail: ExtendedMail) => void
+  onPress: (mail: ExtendedMail) => void
 }
 
-export default function EmailCard({
-  mail,
-  isSelected = true,
-  onSelect,
-  onDeselect,
-  onPress,
-}: EmailCardProps) {
-  // To get the component themes
-  const theme = useTheme()
-  // To navigate to the mail detail page
-  const navigation = useNavigation<StackNavigation>()
-  // The State variables
-  const [isImportant, setImportant] = useState(Math.random() >= 0.5)
+const EmailCard = React.memo(
+  ({ mail, onSelect, onDeselect, onPress }: EmailCardProps) => {
+    // To get the component themes
+    const theme = useTheme()
+    // To navigate to the mail detail page
+    const navigation = useNavigation<StackNavigation>()
+    // The State variables
+    const [isImportant, setImportant] = useState(Math.random() >= 0.5)
 
-  // The conditional styling of the email by seen or not
-  const textStyles = useMemo(
-    () =>
-      (mail.unread
-        ? { fontFamily: "Inter", color: "black", fontWeight: "bold" }
-        : { fontFamily: "Inter", color: theme.colors.text }) as TextStyle,
-    [mail]
-  )
+    // The conditional styling of the email by seen or not
+    const textStyles = useMemo(
+      () =>
+        (mail.unread
+          ? { fontFamily: "Inter", color: "black", fontWeight: "bold" }
+          : { fontFamily: "Inter", color: theme.colors.text }) as TextStyle,
+      [mail]
+    )
 
-  // To Animate the background color on change
-  const animation = useRef(new Animated.Value(isSelected ? 1 : 0)).current
-  const rotation = useRef(new Animated.Value(isSelected ? 1 : 0)).current
+    // To Animate the background color on change
+    const animation = useRef(new Animated.Value(mail?.selected ? 1 : 0)).current
+    const rotation = useRef(new Animated.Value(mail?.selected ? 1 : 0)).current
 
-  // The anim values interpolated
-  const backgroundColor = animation.interpolate({
-    inputRange: [0, 1],
-    outputRange: [theme.colors.background, theme.colors.primaryContainer],
-  })
+    // The anim values interpolated
+    const backgroundColor = animation.interpolate({
+      inputRange: [0, 1],
+      outputRange: [theme.colors.background, theme.colors.primaryContainer],
+    })
 
-  const frontInterpolate = rotation.interpolate({
-    inputRange: [0, 1],
-    outputRange: ["0deg", "180deg"],
-  })
+    const frontInterpolate = rotation.interpolate({
+      inputRange: [0, 1],
+      outputRange: ["0deg", "180deg"],
+    })
 
-  const backInterpolate = rotation.interpolate({
-    inputRange: [0, 1],
-    outputRange: ["180deg", "360deg"],
-  })
+    const backInterpolate = rotation.interpolate({
+      inputRange: [0, 1],
+      outputRange: ["180deg", "360deg"],
+    })
 
-  useEffect(() => {
-    // To animate the background color
-    Animated.timing(animation, {
-      toValue: isSelected ? 1 : 0,
-      duration: 100,
-      easing: Easing.out(Easing.cubic),
-      useNativeDriver: false,
-    }).start()
+    useEffect(() => {
+      // To animate the background color
+      Animated.timing(animation, {
+        toValue: mail?.selected ? 1 : 0,
+        duration: 100,
+        easing: Easing.out(Easing.cubic),
+        useNativeDriver: false,
+      }).start()
 
-    // To animate the rotation of the  icon
-    Animated.timing(rotation, {
-      toValue: isSelected ? 1 : 0,
-      duration: 200,
-      easing: Easing.out(Easing.cubic),
-      useNativeDriver: false,
-    }).start()
-  }, [isSelected])
+      // To animate the rotation of the  icon
+      Animated.timing(rotation, {
+        toValue: mail?.selected ? 1 : 0,
+        duration: 200,
+        easing: Easing.out(Easing.cubic),
+        useNativeDriver: false,
+      }).start()
+    }, [mail?.selected])
 
-  return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        onLongPress={() => (isSelected ? onDeselect(mail) : onSelect(mail))}
-        onPress={() => onPress(mail)}
-        activeOpacity={0.5}
-      >
-        <Animated.View style={[styles.touchable, { backgroundColor }]}>
-          <Pressable
-            hitSlop={15}
-            onPress={() => (isSelected ? onDeselect(mail) : onSelect(mail))}
-          >
-            <FlippableAvatar
-              isSelected={isSelected}
-              label={mail.sender[0].toUpperCase()}
-              frontInterpolate={frontInterpolate}
-              backInterpolate={backInterpolate}
-              textBackground={theme.colors.border}
-            />
-          </Pressable>
+    return (
+      <View style={styles.container}>
+        <TouchableOpacity
+          onLongPress={() =>
+            mail?.selected ? onDeselect(mail) : onSelect(mail)
+          }
+          onPress={() => onPress(mail)}
+          activeOpacity={0.5}
+        >
+          <Animated.View style={[styles.touchable, { backgroundColor }]}>
+            <Pressable
+              hitSlop={15}
+              onPress={() =>
+                mail?.selected ? onDeselect(mail) : onSelect(mail)
+              }
+            >
+              <FlippableAvatar
+                isSelected={mail?.selected ?? false}
+                label={mail.sender[0].toUpperCase()}
+                frontInterpolate={frontInterpolate}
+                backInterpolate={backInterpolate}
+                textBackground={theme.colors.tertiary}
+              />
+            </Pressable>
 
-          <View style={styles.columnContainer}>
-            <View style={styles.rowContainer}>
-              <Text style={[styles.senderText, textStyles]}>{mail.sender}</Text>
-              <Text style={[styles.time, textStyles]}>
-                {moment(mail.timestamp).format("MMM D")}
+            <View style={styles.columnContainer}>
+              <View style={styles.rowContainer}>
+                <Text style={[styles.senderText, textStyles]}>
+                  {mail.sender}
+                </Text>
+                <Text style={[styles.time, textStyles]}>
+                  {moment(mail.timestamp).format("MMM D")}
+                </Text>
+              </View>
+
+              {/* The Subject of the mail */}
+              <Text style={[styles.subjectText, textStyles]}>
+                {mail.subject}
               </Text>
-            </View>
 
-            {/* The Subject of the mail */}
-            <Text style={[styles.subjectText, textStyles]}>{mail.subject}</Text>
-
-            {/* The preview for the mail */}
-            <View style={styles.rowContainer}>
-              <Text style={styles.previewText}>{mail.preview}</Text>
-              <TouchableOpacity
-                hitSlop={5}
-                onPress={() => setImportant(prev => !prev)}
-              >
-                <StarStateIcon
-                  isActive={isImportant}
-                  iconProps={{ size: 20 }}
-                  activeProps={{ color: "#FBBC05" }}
-                />
-              </TouchableOpacity>
+              {/* The preview for the mail */}
+              <View style={styles.rowContainer}>
+                <Text style={styles.previewText}>{mail.preview}</Text>
+                <TouchableOpacity
+                  hitSlop={5}
+                  onPress={() => setImportant(prev => !prev)}
+                >
+                  <StarStateIcon
+                    isActive={isImportant}
+                    iconProps={{ size: 20 }}
+                    activeProps={{ color: "#FBBC05" }}
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-        </Animated.View>
-      </TouchableOpacity>
-    </View>
-  )
-}
+          </Animated.View>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+)
 
 const FlippableAvatar = ({
   isSelected,
@@ -237,3 +240,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 })
+
+export default EmailCard

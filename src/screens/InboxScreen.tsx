@@ -1,11 +1,13 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { FlatList, View, StyleSheet } from "react-native"
 import AppBarWithSearch from "../components/AppBarWithSearch"
 import EmailCard from "../components/EmailCard"
 
-import mailsData, { Mail } from "../data/mails"
 import { StackNavigationProp } from "@react-navigation/stack"
 import { RootStackParamList } from "../navigations/RootNavigator"
+import { ExtendedMail } from "../types"
+import { getPaginatedMails } from "../services"
+import { ActivityIndicator, Text } from "react-native-paper"
 
 interface InboxScreenProps {
   navigation: StackNavigationProp<RootStackParamList, "Drawer">
@@ -13,29 +15,84 @@ interface InboxScreenProps {
 
 export default function InboxScreen({ navigation }: InboxScreenProps) {
   const [searchQuery, setSearchQuery] = useState("")
-  // The list of selected mails
-  const [selectedMail, setSelectedMail] = useState<string[]>([])
 
-  const filteredMails = useMemo(
-    () =>
-      mailsData.filter(
-        mail =>
-          mail.sender.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          mail.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          mail.preview.toLowerCase().includes(searchQuery.toLowerCase())
-      ),
-    [mailsData]
+  // const mails = useMemo(
+  //   () =>
+  //     mailsData.filter(
+  //       mail =>
+  //         mail.sender.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  //         mail.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  //         mail.preview.toLowerCase().includes(searchQuery.toLowerCase())
+  //     ),
+  //   [mailsData]
+  // )
+  // To show loading state
+  const [isLoading, setLoading] = useState(false)
+
+  // The list of selected mails
+  const [mails, setMails] = useState<ExtendedMail[] | null>(null)
+  // To paginate the list
+  const [page, setPage] = useState(1)
+  const [hasMore, setHasMore] = useState(true)
+
+  const onSelect = useCallback((mail: ExtendedMail) => {
+    // Check if it already exists
+    if (mail?.selected) return
+    // Else, mark it selected
+    // setSelectedMail(prev => [...prev, mail.id])
+  }, [])
+
+  const onDeselect = useCallback((mail: ExtendedMail) => {
+    // setSelectedMail(prev => prev.filter(item => item !== mail.id))
+  }, [])
+
+  // Utility to fetch mails on the go
+  const fetchMail = useCallback(
+    async (pageNumber: number) => {
+      setLoading(true)
+      // If we don't have more, then return
+      if (!hasMore) return setLoading(false)
+
+      // Fetch mails from the backend
+      const { data, error } = await getPaginatedMails(pageNumber)
+
+      if (!data || error) {
+        // There was some error in fetching the data
+        return setLoading(false)
+      }
+
+      // Get the data
+      setMails(prev => {
+        const existingIds = new Set(prev?.map(m => m.id) || [])
+        const newMails = data.data.filter(mail => !existingIds.has(mail.id))
+        return prev ? [...prev, ...newMails] : newMails
+      })
+      // Check if we have more pages
+      setHasMore(data.next !== null)
+      // Stop the loading
+      setLoading(false)
+    },
+    [hasMore]
   )
 
-  const onSelect = useCallback((mail: Mail) => {
-    // Check if it already exists
-    if (selectedMail.includes(mail.id)) return
-    setSelectedMail(prev => [...prev, mail.id])
+  const handleLoadMore = useCallback(() => {
+    if (!isLoading && hasMore) {
+      setPage(prev => prev + 1)
+    }
+  }, [isLoading, hasMore])
+
+  const refreshMails = useCallback(() => {
+    // Empty the mail, reset flags
+    setMails(null)
+    setHasMore(true)
+    setLoading(false)
+    setPage(1)
   }, [])
 
-  const onDeselect = useCallback((mail: Mail) => {
-    setSelectedMail(prev => prev.filter(item => item !== mail.id))
-  }, [])
+  // Fetch all the mails, in paginated way
+  useEffect(() => {
+    fetchMail(page)
+  }, [page])
 
   return (
     <View style={styles.container}>
@@ -43,20 +100,52 @@ export default function InboxScreen({ navigation }: InboxScreenProps) {
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
       />
-      <FlatList
-        data={filteredMails}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <EmailCard
-            mail={item}
-            isSelected={selectedMail.includes(item.id)}
-            onSelect={onSelect}
-            onDeselect={onDeselect}
-            onPress={() => navigation.push("MailDetail", { mailId: item.id })}
-          />
-        )}
-        contentContainerStyle={{ paddingBottom: 80 }}
-      />
+      {mails === null ? (
+        <View
+          style={{
+            alignItems: "center",
+            flex: 1,
+            justifyContent: "center",
+          }}
+        >
+          <ActivityIndicator size="large" />
+        </View>
+      ) : (
+        <FlatList
+          data={mails}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <EmailCard
+              mail={item}
+              onSelect={onSelect}
+              onDeselect={onDeselect}
+              onPress={() => navigation.push("MailDetail", { mailId: item.id })}
+            />
+          )}
+          contentContainerStyle={{ paddingBottom: 200 }}
+          onEndReached={handleLoadMore}
+          onEndReachedThreshold={0.3}
+          refreshing={mails === null}
+          onRefresh={refreshMails}
+          ListFooterComponent={
+            isLoading ? (
+              <View
+                style={{
+                  padding: 40,
+                  alignItems: "center",
+                  flex: 1,
+                  justifyContent: "center",
+                }}
+              >
+                <ActivityIndicator size="large" />
+              </View>
+            ) : null
+          }
+          ListEmptyComponent={
+            isLoading ? null : <Text>You have no mails!</Text>
+          }
+        />
+      )}
     </View>
   )
 }
