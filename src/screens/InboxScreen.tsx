@@ -8,13 +8,15 @@ import { RootStackParamList } from "../navigations/RootNavigator"
 import { ExtendedMail } from "../types"
 import { getPaginatedMails, updateMailFromID } from "../services"
 import { ActivityIndicator, Button, Text } from "react-native-paper"
+import { useMail } from "../context/MailContext"
 
 interface InboxScreenProps {
   navigation: StackNavigationProp<RootStackParamList, "Drawer">
 }
 
 export default function InboxScreen({ navigation }: InboxScreenProps) {
-  // const [searchQuery, setSearchQuery] = useState("")
+  // To change the unread count
+  const { setUnreadCount } = useMail()
 
   // To show loading state
   const [isLoading, setLoading] = useState(false)
@@ -134,6 +136,17 @@ export default function InboxScreen({ navigation }: InboxScreenProps) {
   useEffect(() => {
     fetchMail(page)
   }, [page])
+
+  // Change the number of unread mails
+  useEffect(() => {
+    if (!mails || isLoading) return
+    // Count the number of unread mails
+    let unread = 0
+    // This is the expensive step
+    mails.forEach(mail => (unread += Number(mail.unread)))
+    // Set the new unread message count
+    setUnreadCount(unread)
+  }, [mails])
 
   return (
     <View style={styles.container}>

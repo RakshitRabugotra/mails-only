@@ -1,7 +1,7 @@
 import { StyleSheet, View } from "react-native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { CommonActions } from "@react-navigation/native"
-import { BottomNavigation, Text } from "react-native-paper"
+import { Badge, BottomNavigation, Text } from "react-native-paper"
 
 // Importing the screens for the tabs
 import InboxScreen from "../screens/InboxScreen"
@@ -12,6 +12,7 @@ import { PropsWithChildren } from "react"
 
 // Icons
 import { MailStateIcon, VideoStateIcon } from "../components/icons"
+import { useMail } from "../context/MailContext"
 
 // Define types for the tab navigator and home stack
 export type HomeTabParamList = {
@@ -22,8 +23,6 @@ export type HomeTabParamList = {
 export const HomeTab = createBottomTabNavigator<HomeTabParamList>()
 
 export default function TabNavigator() {
-  const unseenMailCount = 5
-
   return (
     <HomeTab.Navigator
       screenOptions={{
@@ -77,7 +76,7 @@ export default function TabNavigator() {
         component={InboxScreen}
         options={{
           tabBarIcon: ({ color, focused }) => (
-            <IconWithBadge count={unseenMailCount}>
+            <IconWithBadge>
               <MailStateIcon
                 isActive={focused}
                 iconProps={{ color, size: 26 }}
@@ -102,24 +101,37 @@ export default function TabNavigator() {
   )
 }
 
-const IconWithBadge = ({
-  count,
-  children,
-}: PropsWithChildren<{ count: number }>) => (
-  <View style={styles.iconWrapper}>
-    {children}
-    {count > 0 && (
-      <View style={styles.badge}>
-        <Text style={styles.badgeText}>{count > 99 ? "99+" : count}</Text>
-      </View>
-    )}
-  </View>
-)
+const IconWithBadge = ({ children }: PropsWithChildren) => {
+  const { unreadCount } = useMail()
+
+  return (
+    <View style={styles.iconWrapper}>
+      {children}
+      {unreadCount > 0 && (
+        // <View style={styles.badge}>
+        //   <Text style={styles.badgeText}>{unreadCount > 99 ? "99+" : unreadCount}</Text>
+        // </View>
+        <Badge
+          size={16}
+          style={{
+            position: "absolute",
+            top: -4,
+            right: -8,
+            backgroundColor: "red",
+            color: "white",
+          }}
+        >
+          {unreadCount > 99 ? "99+" : unreadCount}
+        </Badge>
+      )}
+    </View>
+  )
+}
 
 const styles = StyleSheet.create({
   iconWrapper: {
-    width: 30,
-    height: 30,
+    width: 24,
+    height: 24,
     justifyContent: "center",
     alignItems: "center",
   },

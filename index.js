@@ -8,7 +8,9 @@ import { name as appName } from "./app.json"
 
 import { PaperProvider } from "react-native-paper"
 import { NavigationContainer } from "@react-navigation/native"
+import { MailProvider } from "./src/context/MailContext"
 
+// Custom hooks
 import useTheme from "./src/hooks/use-theme"
 
 export default function Main() {
@@ -16,9 +18,11 @@ export default function Main() {
 
   return (
     <PaperProvider theme={theme}>
-      <NavigationContainer theme={theme}>
-        <App />
-      </NavigationContainer>
+      <MailProvider>
+        <NavigationContainer theme={theme}>
+          <App />
+        </NavigationContainer>
+      </MailProvider>
     </PaperProvider>
   )
 }
