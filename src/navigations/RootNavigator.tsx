@@ -3,6 +3,8 @@ import MailDetailScreen from "../screens/MailDetailScreen"
 import OnboardingScreen from "../screens/OnboardingScreen"
 import SearchScreen from "../screens/SearchScreen"
 import { createStackNavigator } from "@react-navigation/stack"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { View } from "react-native"
 
 export type RootStackParamList = {
   Onboarding: undefined
@@ -14,9 +16,14 @@ export type RootStackParamList = {
 const Stack = createStackNavigator<RootStackParamList>()
 
 export default function RootNavigator() {
+  const insets = useSafeAreaInsets()
+
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
+      screenLayout={({ children }) => (
+        <View style={{ marginTop: insets.top, flex: 1 }}>{children}</View>
+      )}
       initialRouteName="Onboarding"
     >
       <Stack.Screen name="Onboarding" component={OnboardingScreen} />
