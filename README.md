@@ -9,13 +9,13 @@ Follow the steps below to set up and run the project on your local machine.
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/RakshitRabugotra/mails-only.git
 ```
 
 ### 2. Navigate to the Project Directory
 
 ```bash
-cd <your-repo-name>
+cd mails-only
 ```
 ### 3. Run the App on Android
 ```bash
@@ -58,21 +58,27 @@ Follow the ngrok official documentation to:
 ngrok http http://localhost:3000
 ```
 
-Ngrok will generate a public URL (e.g., https://abcd1234.ngrok.io).
+Ngrok will generate a public URL (e.g., https://abcd1234.ngrok-free.app).
 
 ## 🔧 Update the Frontend to Use the Public Backend URL
 
-In the file src/services/mail.ts, update the BACKEND_URI:
+In the file `src/services/storage.ts`, update the default backend uri:
 
 ```ts
 // Before:
-const BACKEND_URI = "https://localhost:3000/mails";
+const result: { backendUri: string; error: Error | null } = {
+  backendUri: "http://localhost:3000",
+  error: null,
+}
 
 // After:
-const BACKEND_URI = "<your-ngrok-public-url>/mails";
+const result: { backendUri: string; error: Error | null } = {
+  backendUri: "<your-ngrok-public-url>",
+  error: null,
+}
 ```
 
-Replace `<your-ngrok-public-url>` with the actual URL provided by ngrok (e.g., `https://abcd1234.ngrok.io`).
+Replace `<your-ngrok-public-url>` with the actual URL provided by ngrok (e.g., `https://abcd1234.ngrok-free.app`).
 
 ## ✅ You're All Set!
 
@@ -81,36 +87,73 @@ You can now use the app and interact with the mock backend over the internet via
 ## 📂 Project Structure
 
 ```
-├── db.json                # Mock database for json-server
+├── android/
 ├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── constants/
+│   ├── context/
+│   ├── data/
+│   ├── hooks/
+│   ├── navigations/
+│   ├── screens/
 │   ├── services/
 │   │   └── mail.ts        # API config with backend URI
+│   ├── types/
+│   ├── utils/
 │   └── ...                # Other app files
 ├── App.tsx
+├── index.js
+├── db.json                # Mock database for json-server
 └── ...
 ```
 
+## 🛠️ Tech Stack
+
+- ⚛️ **React Native**  
+  Core framework used to build the cross-platform mobile application.
+
+- 📝 **React Native Paper**  
+  UI component library implementing Material Design for React Native.
+
+- 🧭 **React Navigation**  
+  Used for implementing navigation (including drawer and stack navigation) between screens.
+
+- 🗄️ **Mock Backend with `json-server`**  
+  Simulated REST API used during development and testing.
+
+
+## ✨ Features Implemented
+
+- ✅ **Material Design Integration**  
+  Utilizes Material Theme and Icons to align with the Gmail design philosophy.
+
+- 📂 **Drawer Navigation**  
+  Seamless drawer-based navigation between different screens of the app.
+
+- 🔍 **Search Screen Transition**  
+  Smooth transition between the search screen and the inbox for improved UX.
+
+- 🔧 **Configurable Backend URI**  
+  Ability to modify the backend URI directly from the **Meet** screen settings.
+
+- 📩 **Email Selection Support**  
+  Users can select multiple emails with Gmail-style background and icon animation.
+
+- 📖 **Read/Unread Email Toggle**  
+  Functionality to mark emails as read or unread.
+
+- 🗑️ **Email Deletion**  
+  Ability to delete emails directly from the inbox view.
+
+- 🔄 **Infinite Scrolling**  
+  Supports lazy loading of emails with infinite scroll for performance optimization.
+
+- 🎨 **Dynamic Navigation Bar Color**  
+  Uses NativeModule to adapt navigation bar color dynamically based on theme or context.
+
+- 🛎️ **Unread Mail Badge**  
+  Displays a badge indicator for unseen (unread) emails.
+
 ## 📄 License
 This project is for educational and personal use only.
-
----
-
-## Tech Stack
-- React Native
-- React Native paper
-- React Navigation
-- Mock backend with `json-server`
-
----
-
-## Features Implemented
-- Use of Material Theme and Icons (to stay true to design philosophy)
-- Drawer navigation between screens
-- Transition between search screen and inbox
-- Ability to change the backend-uri in the given setup through the `Meet-Screen`
-- Ability to select emails (The animation of background and icon from Gmail)
-- Ability to read/unread mails
-- Ability to delete mails
-- Infinite scroll for emails
-- Dynamic Navigation bar color using NativeModule
-- Unseen mail badge
