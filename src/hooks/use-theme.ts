@@ -1,5 +1,4 @@
 import {
-  NavigationContainer,
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
 } from "@react-navigation/native"
@@ -22,5 +21,4 @@ const CombinedDarkTheme = merge(MD3DarkTheme, DarkTheme)
 export default function useTheme() {
   const colorScheme = useColorScheme()
   return colorScheme === "dark" ? CombinedDarkTheme : CombinedDefaultTheme
-  // return CombinedDefaultTheme
 }

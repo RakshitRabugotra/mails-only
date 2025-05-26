@@ -48,7 +48,6 @@ export const HomeIcon = MaterialIcon("home")
 export const ChevronDownIcon = MaterialIcon("chevron-down")
 export const ReplyIcon = MaterialIcon("reply")
 export const ForwardIcon = MaterialIcon("forward")
-export const PaperclipIcon = MaterialIcon("paperclip")
 
 // Stateful icons
 export const MailStateIcon = MaterialStateIcon("email", "email-outline")

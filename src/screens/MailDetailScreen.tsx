@@ -14,12 +14,7 @@ import {
 import { RootStackParamList } from "../navigations/RootNavigator"
 import { ExtendedMail } from "../types"
 import { deleteMailFromID, getMailFromID, updateMailFromID } from "../services"
-import {
-  ChevronDownIcon,
-  PaperclipIcon,
-  ReplyIcon,
-  StarStateIcon,
-} from "../components/icons"
+import { ChevronDownIcon, ReplyIcon, StarStateIcon } from "../components/icons"
 
 type Props = StackScreenProps<RootStackParamList, "MailDetail">
 
@@ -210,7 +205,7 @@ const MailDetailScreen: React.FC<Props> = ({ route, navigation }) => {
           },
         ]}
       >
-        <PaperclipIcon color={theme.colors.outline} />
+        <IconButton icon="paperclip" size={24} onPress={() => {}} />
         <View
           style={[
             styles.inputContainer,

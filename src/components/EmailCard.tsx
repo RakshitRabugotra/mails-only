@@ -1,9 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react"
 import { Avatar, Text } from "react-native-paper"
 import moment from "moment"
-import { useNavigation } from "@react-navigation/native"
-import { StackNavigationProp } from "@react-navigation/stack"
-import { RootStackParamList } from "../navigations/RootNavigator"
 import {
   Animated,
   Easing,
@@ -11,7 +8,6 @@ import {
   StyleSheet,
   TextStyle,
   TouchableOpacity,
-  useColorScheme,
   View,
 } from "react-native"
 import useTheme from "../hooks/use-theme"
@@ -29,7 +25,6 @@ const EmailCard = React.memo(
   ({ mail, onSelect, onDeselect, onPress }: EmailCardProps) => {
     // To get the component themes
     const theme = useTheme()
-    const colorScheme = useColorScheme()
 
     // The State variables
     const [isImportant, setImportant] = useState(Math.random() >= 0.5)
@@ -41,7 +36,7 @@ const EmailCard = React.memo(
           ? {
               fontFamily: "Inter",
               fontWeight: "bold",
-              color: colorScheme === "dark" ? theme.colors.text : "#000",
+              color: theme.dark ? theme.colors.text : "#000",
             }
           : { fontFamily: "Inter", color: theme.colors.outline }) as TextStyle,
       [mail]
