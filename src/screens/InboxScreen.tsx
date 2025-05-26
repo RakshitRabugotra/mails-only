@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { FlatList, View, StyleSheet } from "react-native"
+import React, { useCallback, useEffect, useState } from "react"
+import { FlatList, View, StyleSheet, Animated } from "react-native"
 import AppBarWithSearch from "../components/AppBarWithSearch"
 import EmailCard from "../components/EmailCard"
 
@@ -132,6 +132,28 @@ export default function InboxScreen({ navigation }: InboxScreenProps) {
     [setMails]
   )
 
+  // Animation for search-bar
+  const scrollY = React.useRef(new Animated.Value(0)).current
+  const diffClamp = Animated.diffClamp(scrollY, 0, 100)
+
+  const translateY = diffClamp.interpolate({
+    inputRange: [0, 100],
+    outputRange: [0, -60],
+    extrapolate: "clamp",
+  })
+
+  const marginTop = diffClamp.interpolate({
+    inputRange: [0, 100],
+    outputRange: [0, -60],
+    extrapolate: "clamp",
+  })
+
+  const opacity = diffClamp.interpolate({
+    inputRange: [0, 100],
+    outputRange: [1, 0],
+    extrapolate: "clamp",
+  })
+
   // Fetch all the mails, in paginated way
   useEffect(() => {
     fetchMail(page)
@@ -150,7 +172,16 @@ export default function InboxScreen({ navigation }: InboxScreenProps) {
 
   return (
     <View style={styles.container}>
-      <AppBarWithSearch />
+      <Animated.View
+        style={{
+          zIndex: 100,
+          paddingBottom: 10,
+          transform: [{ translateY }],
+          opacity,
+        }}
+      >
+        <AppBarWithSearch />
+      </Animated.View>
       {mails === null ? (
         <View
           style={{
@@ -172,7 +203,9 @@ export default function InboxScreen({ navigation }: InboxScreenProps) {
           )}
         </View>
       ) : (
-        <FlatList
+        <Animated.FlatList
+          style={{ marginTop }}
+          contentContainerStyle={{ paddingBottom: 200 }}
           data={mails}
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
@@ -183,11 +216,6 @@ export default function InboxScreen({ navigation }: InboxScreenProps) {
               onPress={handleEmailPress}
             />
           )}
-          contentContainerStyle={{ paddingBottom: 200 }}
-          onEndReached={handleLoadMore}
-          onEndReachedThreshold={0.3}
-          refreshing={mails === null}
-          onRefresh={refreshMails}
           ListFooterComponent={
             isLoading ? (
               <View
@@ -205,6 +233,14 @@ export default function InboxScreen({ navigation }: InboxScreenProps) {
           ListEmptyComponent={
             isLoading ? null : <Text>You have no mails!</Text>
           }
+          onScroll={e => {
+            if (e.nativeEvent.contentOffset.y > 5)
+              scrollY.setValue(e.nativeEvent.contentOffset.y)
+          }}
+          onEndReached={handleLoadMore}
+          onEndReachedThreshold={0.3}
+          refreshing={mails === null}
+          onRefresh={refreshMails}
         />
       )}
     </View>
