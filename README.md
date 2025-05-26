@@ -112,3 +112,4 @@ This project is for educational and personal use only.
 - Ability to read/unread mails
 - Ability to delete mails
 - Infinite scroll for emails
+- Dynamic Navigation bar color using NativeModule
