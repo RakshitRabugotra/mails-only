@@ -1,7 +1,13 @@
 import { StackScreenProps } from "@react-navigation/stack"
 import moment from "moment"
 import React, { useCallback, useEffect, useMemo, useState } from "react"
-import { View, ScrollView, StyleSheet, TextInput } from "react-native"
+import {
+  View,
+  ScrollView,
+  StyleSheet,
+  TextInput,
+  Pressable,
+} from "react-native"
 import {
   Text,
   Appbar,
@@ -36,6 +42,7 @@ const MailDetailScreen: React.FC<Props> = ({ route, navigation }) => {
 
   // Control the menu behaviour
   const [menuVisible, setMenuVisible] = useState(false)
+  const [isImportant, setImportant] = useState(mail?.important ?? false)
 
   const openMenu = useCallback(() => setMenuVisible(true), [])
   const closeMenu = useCallback(() => setMenuVisible(false), [])
@@ -162,10 +169,12 @@ const MailDetailScreen: React.FC<Props> = ({ route, navigation }) => {
               </Text>
             </View>
           </View>
-          <StarStateIcon
-            isActive={mail.important ?? false}
-            iconProps={{ size: 26, color: theme.colors.outline }}
-          />
+          <Pressable hitSlop={15} onPress={() => setImportant(prev => !prev)}>
+            <StarStateIcon
+              isActive={isImportant}
+              iconProps={{ size: 26, color: theme.colors.outline }}
+            />
+          </Pressable>
         </View>
 
         <View style={styles.senderRow}>
