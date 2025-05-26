@@ -6,11 +6,14 @@ import {
   TextInput,
   ActivityIndicator,
   Snackbar,
+  useTheme,
 } from "react-native-paper"
 
 import { getBackendUri, updateBackendUri } from "../services/storage"
 
 export default function MeetScreen() {
+  const theme = useTheme()
+
   const [backendUri, setBackendUri] = useState<string | null>(null)
   const [isLoading, setLoading] = useState(false)
 
@@ -63,8 +66,13 @@ export default function MeetScreen() {
   }, [])
 
   return (
-    <View style={styles.container}>
-      <Text variant="titleLarge" style={styles.title}>
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
+      <Text
+        variant="titleLarge"
+        style={[styles.title, { color: theme.colors.outline }]}
+      >
         Update the backend URI to continue
       </Text>
 
@@ -137,6 +145,7 @@ const styles = StyleSheet.create({
   subtitle: {
     textAlign: "center",
     color: "#6c6c6c",
+    paddingVertical: 8,
     paddingHorizontal: 24,
     marginBottom: 32,
   },
