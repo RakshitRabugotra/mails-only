@@ -1,5 +1,5 @@
 import { usePreventRemove } from "@react-navigation/native"
-import { PropsWithChildren, useEffect } from "react"
+import { PropsWithChildren } from "react"
 import { Alert, BackHandler } from "react-native"
 
 export default function PreventBackPress({

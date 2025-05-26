@@ -113,3 +113,4 @@ This project is for educational and personal use only.
 - Ability to delete mails
 - Infinite scroll for emails
 - Dynamic Navigation bar color using NativeModule
+- Unseen mail badge

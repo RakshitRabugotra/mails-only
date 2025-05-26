@@ -134,7 +134,7 @@ const MailDetailScreen: React.FC<Props> = ({ route, navigation }) => {
             <Menu.Item onPress={() => {}} title="Move to" />
             <Menu.Item onPress={() => {}} title="Report spam" />
           </Menu>
-          <Appbar.Action icon="email-outline" onPress={() => {}} />
+          <Appbar.Action icon="email-outline" onPress={handleMarkUnread} />
           <Appbar.Action icon="trash-can-outline" onPress={handleDeleteMail} />
           <Appbar.Action icon="archive-arrow-down-outline" onPress={() => {}} />
         </View>

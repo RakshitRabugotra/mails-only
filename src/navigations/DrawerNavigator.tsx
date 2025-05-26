@@ -1,7 +1,7 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import TabNavigator from './TabNavigator';
 import MockScreen from '../screens/MockScreens';
-import PreventBackPress from "../components/prevent-back-press"
+import PreventBackPress from "../components/PreventBackPress"
 
 export type DrawerParamList = {
   Home: undefined

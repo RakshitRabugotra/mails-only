@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from "react"
-import { FlatList, View, StyleSheet, Animated } from "react-native"
+import { useCallback, useEffect, useRef, useState } from "react"
+import { View, StyleSheet, Animated } from "react-native"
 import AppBarWithSearch from "../components/AppBarWithSearch"
 import EmailCard from "../components/EmailCard"
 
@@ -133,7 +133,7 @@ export default function InboxScreen({ navigation }: InboxScreenProps) {
   )
 
   // Animation for search-bar
-  const scrollY = React.useRef(new Animated.Value(0)).current
+  const scrollY = useRef(new Animated.Value(0)).current
   const diffClamp = Animated.diffClamp(scrollY, 0, 100)
 
   const translateY = diffClamp.interpolate({

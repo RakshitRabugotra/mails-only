@@ -1,5 +1,4 @@
 import { StackNavigationProp } from "@react-navigation/stack"
-import React from "react"
 import { View, Image, StyleSheet } from "react-native"
 import { Text, Button, useTheme } from "react-native-paper"
 import { RootStackParamList } from "../navigations/RootNavigator"
@@ -74,7 +73,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: "80%",
-    backgroundColor: '#FF4F5A',
+    backgroundColor: "#FF4F5A",
     borderRadius: 30,
   },
 })

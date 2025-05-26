@@ -16,7 +16,7 @@ const App: React.FC = () => {
   useEffect(() => {
     if (Platform.OS === "android") {
       const hexColor = rgbaToAndroidHex(theme.colors.card)
-      NativeModules.NavigationBar?.setColor(hexColor, !theme.dark)
+      NativeModules.NavigationBar?.setColor(hexColor)
     }
   }, [theme])
 
