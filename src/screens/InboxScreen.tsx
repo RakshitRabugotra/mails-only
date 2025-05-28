@@ -108,7 +108,7 @@ export default function InboxScreen({ navigation }: InboxScreenProps) {
       if (!mail) return
       // Start marking as read
       if (mail.unread) {
-        updateMailFromID(mail.id, { ...mail, unread: false })
+        updateMailFromID(mail.id, { unread: false })
           .then(({ error }) => {
             if (error) throw error
             // Update the local instance

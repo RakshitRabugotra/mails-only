@@ -78,7 +78,7 @@ const MailDetailScreen: React.FC<Props> = ({ route, navigation }) => {
     // If already unread, skip to navigation
     if (mail.unread) return navigation.push("Drawer")
 
-    updateMailFromID(mail.id, { ...mail, unread: true })
+    updateMailFromID(mail.id, { unread: true })
       .then(({ error }) => {
         if (error) throw error
       })

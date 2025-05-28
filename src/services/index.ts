@@ -24,7 +24,7 @@ export const getPaginatedMails = async (
   // Try to fetch the emails
   try {
     const resp = await mailFetch(
-      `/?_page=${Math.max(1, page)}&_per_page=${perPage}`
+      `/mails?_page=${Math.max(1, page)}&_per_page=${perPage}`
     )
     console.log(resp.url)
     if (resp.ok) {
@@ -39,6 +39,41 @@ export const getPaginatedMails = async (
   }
 }
 
+/**
+ * Search the mails
+ */
+export interface SearchResults {
+  total: number
+  data: ExtendedMail[]
+}
+
+export const searchMailsFromText = async (
+  query: string
+): Promise<APIResponse<SearchResults>> => {
+  const result: APIResponse<SearchResults> = { data: null, error: null }
+
+  // Try to fetch the result from backend
+  try {
+    const resp = await mailFetch(`/search?q=${query.toLowerCase()}`)
+    if (resp.ok) {
+      result.data = await resp.json()
+      return result
+    }
+    // Else, throw the error and return no data
+    throw new Error(
+      `Error while search for the mail (query=${query}) status: ` +
+        resp.statusText
+    )
+  } catch (error) {
+    result.error = error as Error
+    return result
+  }
+}
+
+/**
+ * Get the mail from the id
+ */
+
 export const getMailFromID = async (
   mailId: string
 ): Promise<APIResponse<ExtendedMail>> => {
@@ -46,7 +81,7 @@ export const getMailFromID = async (
 
   // Try to fetch the email
   try {
-    const resp = await mailFetch(`/${mailId}`)
+    const resp = await mailFetch(`/mails/${mailId}`)
     console.log(resp.url)
     if (resp.ok) {
       result.data = await resp.json()
@@ -65,14 +100,17 @@ export const getMailFromID = async (
  */
 export const updateMailFromID = async (
   mailId: string,
-  newMail: ExtendedMail
+  newMail: Partial<Omit<ExtendedMail, "id">>
 ): Promise<APIErrorResponse> => {
   const result: APIErrorResponse = { error: null }
-
+  console.log("body:", newMail)
   try {
-    const resp = await mailFetch(`/${mailId}`, {
+    const resp = await mailFetch(`/mails/${mailId}`, {
       method: "PUT",
       body: JSON.stringify(newMail),
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
     if (!resp.ok) throw new Error("Error updating the mail-id: " + mailId)
   } catch (error) {
@@ -80,7 +118,6 @@ export const updateMailFromID = async (
   }
   return result
 }
-
 
 /**
  * Delete the mail
@@ -94,12 +131,12 @@ export const deleteMailFromID = async (
     // First get the mail we're trying to delete
     const { data: mail, error } = await getMailFromID(mailId)
     // Throw the error if so
-    if(error) throw error;
+    if (error) throw error
     // Set the data
-    result.data = mail;
+    result.data = mail
     // Send the signal to delete the mail
-    const resp = await mailFetch(`/${mailId}`, {
-      method: "DELETE"
+    const resp = await mailFetch(`/mails/${mailId}`, {
+      method: "DELETE",
     })
     if (!resp.ok) throw new Error("Error updating the mail-id: " + mailId)
   } catch (error) {
