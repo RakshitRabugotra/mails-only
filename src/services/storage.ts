@@ -32,7 +32,7 @@ export const updateBackendUri = async (backendUri: string) => {
  */
 export const getBackendUri = async () => {
   const result: { backendUri: string; error: Error | null } = {
-    backendUri: "http://localhost:3000",
+    backendUri: "https://mock-mails.onrender.com",
     error: null,
   }
   try {
